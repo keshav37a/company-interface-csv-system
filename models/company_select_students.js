@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-const companySchema = new mongoose.Schema({
+const companySelectStudentsSchema = new mongoose.Schema({
     company:{
         type: String,
         required: true
     },
-    students:[{
+    selected_students:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'company'
+        ref: 'student'
     }],
 }, {
     timestamps : true
 });
 
 //creating and exporting our schema
-const CourseScoreItem = mongoose.model('course_score', companySchema);
-module.exports = CourseScoreItem;
+const CompanySelectStudents = mongoose.model('company_select_students', companySelectStudentsSchema);
+module.exports = CompanySelectStudents;

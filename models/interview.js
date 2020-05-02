@@ -11,7 +11,7 @@ const interviewSchema = new mongoose.Schema({
     },
     students:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'company'
+        ref: 'student'
     }]   
 }, {
     timestamps : true

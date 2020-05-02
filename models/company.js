@@ -5,7 +5,7 @@ const companySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    jobProfile:{
+    job_profile:{
         type: String,
         required: true
     },
@@ -14,5 +14,5 @@ const companySchema = new mongoose.Schema({
 });
 
 //creating and exporting our schema
-const CourseScoreItem = mongoose.model('course_score', companySchema);
-module.exports = CourseScoreItem;
+const CompanyItem = mongoose.model('company', companySchema);
+module.exports = CompanyItem;
