@@ -7,3 +7,5 @@ app.listen(port, function(err){
 
     console.log(`app up and running on port ${port}`);
 })
+
+app.use('/', require('./routes/index'));
