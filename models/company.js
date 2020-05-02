@@ -9,6 +9,10 @@ const companySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    hr_email:{
+        type: String,
+        required: true
+    }
 }, {
     timestamps : true
 });

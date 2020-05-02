@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="/css/list_company.css">
+<main>
+    <div id="btn-add-company"><a href="/company/new-company">Add company</a></div>
+    <div id="btn-add-company"><a href="/companies/new-company">Add Company</a></div>
+    <div class="company-container">
+
+        <% 
+            for(let company of companies)  
+            {%> 
+                <div class="single-company-container">
+                    <div class="nam-bat-id-container">
+                        <div class="text-1"><%= company.name %></div>
+                        <div class="text-1"><%= company.job_profile %></div>
+                        <div class="text-2"><%= company._id %></div>
+                    </div>
+                    <div class="actions-container">
+                        <div class="action-1"><button>Add Interview</button></div>
+                        <div class="action-1">More Details</div>
+                    </div>
+                </div>
+            <%}
+        %>
+        <div class="single-company-container">
+            <div class="nam-bat-id-container">
+                <div class="text-1">Amazon</div>
+                <div class="text-1">SDE-1</div>
+                <div class="text-2">1fgt34f6u</div>
+            </div>
+            <div class="actions-container">
+                <div class="action-1"><button>Add Interview</button></div>
+                <div class="action-1">More Details</div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/js/list_company.js"></script>

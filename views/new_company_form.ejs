@@ -1,0 +1,25 @@
+<link rel="stylesheet" type="text/css" href="/css/new_company_form.css">
+<main>
+    <div class="forms-container">
+        <div id="new-company-div">
+            <form action="/companies/create-company" method="POST" id="new-company-form">
+                <div class="welcome-txt">Add New company</div>
+                <input type="text" placeholder="Name" name="name" class="input-initial" required>
+                <input type="email" placeholder="HR Email" name="email" class="input-initial" required>
+                <select name="job-profile" id="job-profile-select" class="input-initial">
+                    <option value="Not Specified">Choose JD</option>
+                    <option value="SDE-1">SDE-1</option>
+                    <option value="SDE-2">SDE-2</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="NodeJS">NodeJS</option>
+                    <option value="React">React</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Full Stack Web Development">Full Stack Web Development</option>
+                    <option value="Android">Android</option>
+                </select>
+                <button id="btn-new-company" type="submit">Add company</button>
+            </form>
+        </div>
+    </div>
+</main>
