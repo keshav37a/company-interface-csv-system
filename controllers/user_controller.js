@@ -56,7 +56,7 @@ module.exports.createSessionRequest = function(req, res){
     console.log(req.body);
     let title = "sign-in";
 
-    return res.render('list_students', {title:title});
+    return res.redirect('/students');
 }
 
 //for signing out and destroying session

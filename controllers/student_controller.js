@@ -1,4 +1,4 @@
-module.exports.student = function(req, res){
+module.exports.home = function(req, res){
     console.log('student in student_controller called');
-    return res.send('<h1>Student</h1>');
+    return res.render('list_students', {title:'Students List'});
 }
