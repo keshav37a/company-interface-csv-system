@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
+const Crypto = require('../config/crypto');
 
 console.log('passport local strategy loaded');
 
@@ -24,8 +25,11 @@ passport.use(new LocalStrategy({
                 return done(null, false);
             }
 
+            let encrPass = user.password;
+            let decrPass = Crypto.decrypt(encrPass);
+
             // If user is found but password incorrect
-            if(user.password != password){
+            if(decrPass != password){
                 console.log(`User pwd from db- ${user.password} password entered- ${password}`);
                 console.log('Incorrect Password --- Passport.js');
                 return done(null, false);

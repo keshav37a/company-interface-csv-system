@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Crypto = require('../config/crypto');
 
 module.exports.user = function(req, res){
     console.log('user in user_controller called');
@@ -29,7 +30,12 @@ module.exports.createUserRequest = async function(req, res){
 
         //If user entry is not found on the db by email then add the user in the db
         if (!user) {
-            let createdUser = await User.create(req.body);
+            let user = req.body;
+            let decrPass = user.password;
+            let encrPass = Crypto.encrypt(decrPass);
+            user.password = encrPass;
+
+            let createdUser = await User.create(user);
             if (createdUser) {
                 console.log('user created successfully');
                 return res.redirect('/users/sign-in');
@@ -51,4 +57,13 @@ module.exports.createSessionRequest = function(req, res){
     let title = "sign-in";
 
     return res.render('list_students', {title:title});
+}
+
+//for signing out and destroying session
+module.exports.destroySession = function (req, res) {
+    console.log('usersController.destroySession');
+    req.logout();
+    // req.flash('success', 'Logged Out Successfully');
+    let title = "sign-in";
+    return res.render('sign-in', {title:title});
 }
