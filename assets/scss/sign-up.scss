@@ -1,74 +1,51 @@
 body{
     background-color: #989FBB;
     font-family: Arial, Helvetica, sans-serif;
-}
 
-#website-header{
-    text-align: center;
-}
+    main{
+        height: 100%;
 
-#sign-in-div{
-    background-color: #FFFFFF;
-    width: 20rem;
-    border-radius: 25px;
-}
+        #sign-up-div{
+            background-color: #FFFFFF;
+            width: 20rem;
+            border-radius: 25px;
 
-#welcome-img{
-    height: 10rem;
-    width: 10rem;
-}
+            .welcome-txt{
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 600;
+                color: #828282;
+            }
+            
+            .input-initial{
+                width: 80%;
+                border: 1px solid #e5e5e5;
+                margin-left: 3rem;
+                margin-right: 3rem;
+            }
 
-.welcome-txt{
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
-    color: #828282;
-}
+            .link-appearance{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 0.75rem;
+                text-decoration: none;
+                color: #567FF3;
+                font-weight: 600;
+            }
+            
+            .link-desc{
+                margin-left: 0.5rem;
+                flex-grow: 1;
+                margin-right: 1rem;
+                font-size: 0.75rem;
+            }
 
-.input-initial{
-    width: 80%;
-    border: 1px solid #e5e5e5;
-    margin-left: 3rem;
-    margin-right: 3rem;
-}
-
-#check-sign-in-container{
-    width: 90%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.75rem;
-}
-
-.link-appearance{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.75rem;
-    text-decoration: none;
-    color: #567FF3;
-    font-weight: 600;
-}
-
-.link-desc{
-    margin-left: 0.5rem;
-    flex-grow: 1;
-    margin-right: 1rem;
-    font-size: 0.75rem;
-}
-
-
-#check-sign-in{
-    height: 1rem;
-    width: 1rem;
-}
-
-#check-sign-in-desc{
-    margin-left: 0.5rem;
-    flex-grow: 1;
-    margin-right: 1rem;
-} 
-
-#btn-sign-in{
-    background-color:#70BD6B;
-    color: #FFFFFF;
-    margin-bottom: 1rem;
-    border: none;
+            #btn-sign-up{
+                background-color:#70BD6B;
+                color: #FFFFFF;
+                margin-bottom: 1rem;
+                border: none;
+            }   
+        }
+    }
 }
 
 /* General */
