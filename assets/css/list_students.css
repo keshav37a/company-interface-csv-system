@@ -1,2 +1,27 @@
-body {
-  background-color: darkgreen; }
+body main {
+  background-color: green; }
+  body main .students-container {
+    margin: 0.5rem;
+    background-color: orange;
+    display: flex;
+    flex-direction: column; }
+    body main .students-container .single-student-container {
+      margin: 0.5rem;
+      background-color: pink;
+      display: flex;
+      flex-direction: row; }
+      body main .students-container .single-student-container .nam-bat-id-container {
+        background-color: brown;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1; }
+        body main .students-container .single-student-container .nam-bat-id-container .text-1 {
+          margin: 0.25rem; }
+        body main .students-container .single-student-container .nam-bat-id-container .text-2 {
+          margin: 0.5rem; }
+      body main .students-container .single-student-container .actions-container {
+        display: flex;
+        flex-direction: column;
+        background-color: grey; }
+        body main .students-container .single-student-container .actions-container .action-1 {
+          margin: 0.5rem; }
