@@ -49,5 +49,6 @@ module.exports.createUserRequest = async function(req, res){
 module.exports.createSessionRequest = function(req, res){
     console.log(req.body);
     let title = "sign-in";
-    return res.render('sign-in', {title:title});
+
+    return res.render('list_students', {title:title});
 }
