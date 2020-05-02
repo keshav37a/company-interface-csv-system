@@ -1,6 +1,11 @@
 body{
     main{
         background-color: green;
+
+        #btn-add-student{
+            text-align: center;
+        }
+
         .students-container{
             margin: 0.5rem;
             background-color: orange;

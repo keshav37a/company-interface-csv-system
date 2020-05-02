@@ -18,19 +18,19 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    courseScore:{
+    course_score:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'course_score'
     },
-    placementStatus:{
+    placement_status:{
         type: String,
         required: true
     },
-    interviewScheduledWithCompanies:[{
+    interview_scheduled_with_companies:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'company'
     }],
-    selectedInCompanies:[{
+    selected_in_companies:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'company'
     }]

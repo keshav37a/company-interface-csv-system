@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="/css/new_student_form.css">
+<main>
+    <div class="forms-container">
+        <div id="new-student-div">
+            <form action="/students/create-student" method="POST" id="new-student-form">
+                <div class="welcome-txt">Add New Student</div>
+                <input type="text" placeholder="Name" name="name" class="input-initial" required>
+                <input type="email" placeholder="Email" name="email" class="input-initial" required>
+                <select name="batch" id="batch-select" class="input-initial">
+                    <option value="Full Stack Web Development">Full Stack Web Development</option>
+                    <option value="Career Camp">Career Camp</option>
+                </select>
+                <input type="text" placeholder="College" name="college" class="input-initial" required>
+                <input type="text" placeholder="DS Score" name="course-score-ds" class="input-initial" required>
+                <input type="text" placeholder="Web Dev Score" name="course-score-web" class="input-initial" required>
+                <input type="text" placeholder="React Score" name="course-score-react" class="input-initial" required>
+                <button id="btn-new-student" type="submit">Add Student</button>
+            </form>
+        </div>
+    </div>
+</main>
