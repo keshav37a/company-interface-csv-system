@@ -1,0 +1,22 @@
+<link rel="stylesheet" type="text/css" href="/css/sign-in.css">
+<main class="main">
+    <div class="forms-container flex row center">
+        <div id="sign-in-div">
+            <form action="/users/create-session" method="POST" id="sign-in-form" class="flex col center-al">
+                <div class="welcome-txt mar1">Sign In</div>
+                <input class="input-initial mar1 pad1" type="email" placeholder="Username or Email" name="email" required>
+                <input class="input-initial mar1 pad1" type="password" placeholder="Password" name="password" required>
+                <div id="check-sign-in-container" class="flex row start">
+                    <input id="check-sign-in" type="checkbox" name="signed-in" class="mar-pad-0">
+                    <div class="link-desc">Keep Me Signed In</div>
+                    <a href="" class="link-appearance">Reset Password</a>
+                </div>
+                <button id="btn-sign-in" type="submit" class="mar1 width90 pad1">Open Sesame</button>
+                <div class="flex row start mb1">
+                    <div class="link-desc">New To Our Website?</div>
+                    <a href="/users/sign-up" class="link-appearance">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
