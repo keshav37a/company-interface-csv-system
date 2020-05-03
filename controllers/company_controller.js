@@ -13,7 +13,7 @@ module.exports.newcompanyRender = async function (req, res) {
 module.exports.createcompanyRequest = async function (req, res) {
     try{
         console.log('createCompanyRequest in interview_controller called');
-        console.log(req.body);
+        // console.log(req.body);
         let company = await Company.findOne({name:req.body.name});
         if(company){
             console.log('company already exists');
@@ -25,8 +25,8 @@ module.exports.createcompanyRequest = async function (req, res) {
                 hr_email: req.body.email
             });
 
-            console.log('new interview created');
-            console.log(newCompany);
+            console.log('new newCompany created');
+            // console.log(newCompany);
 
             return res.redirect('/companies');
         }

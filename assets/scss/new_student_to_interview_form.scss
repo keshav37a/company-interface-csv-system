@@ -1,0 +1,67 @@
+body{
+    background-color: #989FBB;
+    font-family: Arial, Helvetica, sans-serif;
+
+    main{
+        height: 100%;
+
+        .forms-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            #new-student-to-interview-div{
+                background-color: #FFFFFF;
+                width: 20rem;
+                border-radius: 25px;
+    
+                #new-student-to-interview-form{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+    
+                    .welcome-txt{
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-weight: 600;
+                        color: #828282;
+                        margin: 1rem;
+                    }
+                    
+                    .input-initial{
+                        width: 80%;
+                        border: 1px solid #e5e5e5;
+                        margin-left: 3rem;
+                        margin-right: 3rem;
+                        margin: 1rem;
+                        padding: 1rem;
+                    }
+        
+                    .link-appearance{
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 0.75rem;
+                        text-decoration: none;
+                        color: #567FF3;
+                        font-weight: 600;
+                    }
+                    
+                    .link-desc{
+                        margin-left: 0.5rem;
+                        flex-grow: 1;
+                        margin-right: 1rem;
+                        font-size: 0.75rem;
+                    }
+        
+                    #btn-new-student-to-interview{
+                        background-color:#70BD6B;
+                        color: #FFFFFF;
+                        margin-bottom: 1rem;
+                        border: none;
+                        margin: 1rem;
+                        padding: 1rem;
+                        width: 90%;
+                    }   
+                }            
+            }
+        }
+    }
+}
