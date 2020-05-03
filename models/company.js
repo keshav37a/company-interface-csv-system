@@ -14,5 +14,5 @@ const companySchema = new mongoose.Schema({
 });
 
 //creating and exporting our schema
-const CompanyItem = mongoose.model('company', companySchema);
+const CompanyItem = mongoose.model('companies', companySchema);
 module.exports = CompanyItem;

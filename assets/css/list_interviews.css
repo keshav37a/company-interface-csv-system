@@ -1,0 +1,37 @@
+body main {
+  background-color: grey; }
+  body main #btn-add-interview {
+    text-align: center; }
+  body main .interview-container {
+    margin: 0.5rem;
+    background-color: orange;
+    display: flex;
+    flex-direction: column; }
+    body main .interview-container .single-interview-container {
+      margin: 0.5rem;
+      background-color: pink;
+      display: flex;
+      flex-direction: row;
+      max-height: 5rem; }
+      body main .interview-container .single-interview-container .nam-bat-id-container {
+        background-color: brown;
+        display: flex;
+        flex-direction: column; }
+        body main .interview-container .single-interview-container .nam-bat-id-container .text-1 {
+          margin: 0.25rem; }
+        body main .interview-container .single-interview-container .nam-bat-id-container .text-2 {
+          margin: 0.5rem; }
+      body main .interview-container .single-interview-container .students-container {
+        overflow-y: scroll;
+        flex-grow: 1; }
+        body main .interview-container .single-interview-container .students-container .single-student-container {
+          background-color: lightblue;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 1rem; }
+      body main .interview-container .single-interview-container .actions-container {
+        display: flex;
+        flex-direction: column;
+        background-color: grey; }
+        body main .interview-container .single-interview-container .actions-container .action-1 {
+          margin: 0.5rem; }

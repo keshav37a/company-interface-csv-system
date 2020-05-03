@@ -7,7 +7,7 @@ const companySelectStudentsSchema = new mongoose.Schema({
     },
     selected_students:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'student'
+        ref: 'students'
     }],
 }, {
     timestamps : true

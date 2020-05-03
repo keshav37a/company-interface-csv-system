@@ -20,7 +20,7 @@ const studentSchema = new mongoose.Schema({
     },
     course_score:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'course_score'
+        ref: 'course_scores'
     },
     placement_status:{
         type: String,
@@ -28,16 +28,16 @@ const studentSchema = new mongoose.Schema({
     },
     interview_scheduled_with_companies:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'interview'
+        ref: 'interviews'
     }],
     selected_in_companies:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'company'
+        ref: 'companies'
     }]
 }, {
     timestamps : true
 });
 
 //creating and exporting our schema
-const StudentItem = mongoose.model('student', studentSchema);
+const StudentItem = mongoose.model('students', studentSchema);
 module.exports = StudentItem;

@@ -4,7 +4,24 @@ const Interview = require('../models/interview');
 
 module.exports.home = async function(req, res){
     console.log('home in interview_controller called');
-    let interviews = await Interview.find();
+    // let interviewArr = [];
+    let interviews = await Interview.find({}).populate('company').populate('students');
+    // for (let i=0; i<interviews.length; i++){
+    //     interviewArr[i] = interviews[i];
+    //     if(interviews[i].students.length>0){
+    //         let studentArr = [];
+    //         for(let j=0; j<interviews[i].students.length; j++){
+    //             let studentId = interviews[i].students[j];
+    //             let student = await Student.findById(studentId);
+    //             studentArr.push(student);
+    //         }
+            
+    //         interviewArr[i].students = studentArr;
+    //     }
+    // }
+    console.log(interviews);
+    console.log(interviews[0].students);
+
     return res.render('list_interviews', {title:'interview List', interviews: interviews});
 }
 
@@ -46,7 +63,7 @@ module.exports.createInterviewRequest = async function(req, res){
             }
             console.log(company);
             let newInterview = await Interview.create({
-                company_name: company._id,
+                company: company._id,
                 job_profile: req.body['job-profile'],
                 students: studentIdFromDB,
                 interview_date: req.body['date']
@@ -55,7 +72,7 @@ module.exports.createInterviewRequest = async function(req, res){
             console.log(newInterview);
 
             for(let student of studentArrayFromDB){
-                student.interview_scheduled_with_companies.push(company._id);
+                student.interview_scheduled_with_companies.push(newInterview._id);
                 await student.save();
             }
 

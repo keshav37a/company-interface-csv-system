@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const interviewSchema = new mongoose.Schema({
     company:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'company'
+        ref: 'companies'
     },
     interview_date:{
         type: Date,
@@ -15,12 +15,12 @@ const interviewSchema = new mongoose.Schema({
     },
     students:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'student'
+        ref: 'students'
     }]   
 }, {
     timestamps : true
 });
 
 //creating and exporting our schema
-const InterviewItem = mongoose.model('interview', interviewSchema);
+const InterviewItem = mongoose.model('interviews', interviewSchema);
 module.exports = InterviewItem;

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/css/list_interview.css">
+<link rel="stylesheet" type="text/css" href="/css/list_interviews.css">
 <main>
     <div id="btn-add-interview"><a href="/interview/new-interview">Add interview</a></div>
     <div class="interview-container">
@@ -8,9 +8,20 @@
             {%> 
                 <div class="single-interview-container">
                     <div class="nam-bat-id-container">
-                        <div class="text-1"><%= interview.company_name %></div>
-                        <div class="text-1"><%= interview.company_date %></div>
-                        <div class="text-2"><%= interview._id %></div>
+                        <div class="text-1"><%= interview.company.name %></div>
+                        <div class="text-1"><%= interview.job_profile %></div>
+                        <div class="text-2"><%= interview.interview_date %></div>
+                    </div>
+                    <div class="students-container">
+                        <% 
+                            for(let student of interview.students) {%> 
+                                <div class="single-student-container">
+                                    <div class="text-1"><%= student.name %></div>
+                                    <div class="text-1"><%= student.name %></div>                                
+                                    <div class="text-1"><%= student.name %></div>
+                                </div>      
+                            <%}
+                        %>
                     </div>
                     <div class="actions-container">
                         <div class="action-1"><button>Add Student</button></div>

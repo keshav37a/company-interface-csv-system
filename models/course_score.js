@@ -15,12 +15,12 @@ const courseScoreSchema = new mongoose.Schema({
     },
     student:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'student'
+        ref: 'students'
     }
 }, {
     timestamps : true
 });
 
 //creating and exporting our schema
-const CourseScoreItem = mongoose.model('course_score', courseScoreSchema);
+const CourseScoreItem = mongoose.model('course_scores', courseScoreSchema);
 module.exports = CourseScoreItem;
