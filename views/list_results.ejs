@@ -1,0 +1,46 @@
+<link rel="stylesheet" type="text/css" href="/css/list_results.css">
+<main>
+    <div id="btn-add-result"><a href="/results/new-result">Add result</a></div>
+    <div class="result-container">
+        <table>
+            <tr>
+                <th><div>Student Name</div></th>
+                <th><div>College</div></th>
+                <th><div>Is Placed</div></th>
+                <th><div>DS Score</div></th>
+                <th><div>Web Dev Score</div></th>
+                <th><div>React Score</div></th>
+                <th><div>Interview Date</div></th>
+                <th><div>Company</div></th>
+                <th><div>Status</div></th>
+                <th><div>Actions</div></th>
+            </tr>
+
+                <%
+                for(let result of results)  
+                {%> <tr>
+                        <td class="table-td"><div class="table-td"><%=result.student.name%></div></td>
+                        <td class="table-td"><div><%=result.student.college%></div></td>
+                        <td class="table-td"><div><%=result.student.placement_status%></div></td>
+                        <td class="table-td"><div><%=result.student.course_score.data_structures%></div></td>
+                        <td class="table-td"><div><%=result.student.course_score.web_development%></div></td>
+                        <td class="table-td"><div><%=result.student.course_score.react%></div></td>
+                        <td class="table-td"><div><%=result.interview.interview_date%></div></td>
+                        <td class="table-td"><div><%=result.interview.company.name%></div></td>
+                        <td class="table-td"><div><%=result.status%></div></td>
+                        <td class="table-td"><div class="actions-container"></div></td>    
+                    </tr>
+                    <br>
+                <%}
+                %>
+            </tr>
+        </table>
+        <div class="header-container">
+            
+        </div>
+        <% 
+            
+        %>
+    </div>
+</main>
+<script src="/js/list_result.js"></script>

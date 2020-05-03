@@ -5,9 +5,9 @@ const resultSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'students'
     },
-    company_name:{
+    interview:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'companies'
+        ref: 'interviews'
     },
     status:{
         type:String,
@@ -18,5 +18,5 @@ const resultSchema = new mongoose.Schema({
 });
 
 //creating and exporting our schema
-const StudentItem = mongoose.model('student', resultSchema);
-module.exports = StudentItem;
+const ResultItem = mongoose.model('result', resultSchema);
+module.exports = ResultItem;

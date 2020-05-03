@@ -1,0 +1,45 @@
+<link rel="stylesheet" type="text/css" href="/css/new_result_form.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/new_result_form.js"></script>
+
+<main>
+    <div class="forms-container">
+        <div id="new-result-div">
+            <form action="/results/create-result" method="POST" id="new-result-form">
+                <div class="welcome-txt">Add New result</div>
+       
+                <select name="student" id="student-select" class="input-initial">
+                    <option value="none">Select Student</option>
+                    <% 
+                        for(let option of students)
+                        {%> 
+                            <option value="<%= option._id%>"><%= option.name %></option>    
+                        <%}
+                    %> 
+                </select>
+       
+                <select name="interview-name" id="result-select" class="input-initial" name="interview-name">
+                    <option value="none">Select Company</option>
+                    <% 
+                        for(let option of interviews)
+                        {%> 
+                            <option value="<%= option._id%>"><%= option.company.name %></option>    
+                        <%}
+                    %> 
+                </select>
+                <select name="result" id="result-select" class="input-initial">
+                    <option value="none">Select Result</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Fail">Fail</option>
+                    <option value="On Hold">On Hold</option>
+                    <option value="Didn't Attempt">Didn't Attempt</option>
+                </select>
+                <button id="btn-new-result" type="submit">Add Result</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+

@@ -5,6 +5,7 @@ const studentController = require('../controllers/student_controller');
 
 router.get('/', passport.checkAuthentication, studentController.home);
 router.get('/new-student', passport.checkAuthentication, studentController.newStudentRender);
+
 router.post('/create-student', passport.checkAuthentication, studentController.createStudentRequest);
 
 module.exports = router;
