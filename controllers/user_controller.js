@@ -60,10 +60,10 @@ module.exports.createSessionRequest = function(req, res){
 }
 
 //for signing out and destroying session
-module.exports.destroySession = function (req, res) {
+module.exports.destroySessionRequest = async function (req, res) {
     console.log('usersController.destroySession');
-    req.logout();
+    await req.logout();
     // req.flash('success', 'Logged Out Successfully');
     let title = "sign-in";
-    return res.render('sign-in', {title:title});
+    return res.redirect('/users/sign-in');
 }

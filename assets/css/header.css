@@ -1,2 +1,24 @@
-.header {
-  background-color: darkblue; }
+body {
+  margin: 0; }
+  body header {
+    background-color: #989FBB; }
+    body header .links-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: start; }
+      body header .links-container div {
+        margin-left: 1rem; }
+        body header .links-container div a {
+          color: #FFFFFF;
+          font-weight: 300;
+          text-decoration: none; }
+
+#header-container {
+  background-color: #0680FD;
+  padding: 0.5rem; }
+
+#site-heading {
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #FFFFFF;
+  font-size: 1.5rem; }

@@ -1,3 +1,34 @@
-.header{
-    background-color: darkblue;
+body{
+    margin: 0;
+    header{
+        background-color: #989FBB;
+        .links-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+        
+            div{
+                margin-left: 1rem;
+                a{
+                    color: #FFFFFF;
+                    font-weight: 300;
+                    text-decoration: none;
+                }
+            }
+        }    
+        
+    }
 }
+#header-container{
+    background-color: #0680FD;
+    padding: 0.5rem;
+    
+}
+
+#site-heading{
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+}
+

@@ -1,2 +1,16 @@
-<link rel="stylesheet" type="text/css" href="/css/footer.css">
-<h1 class="footer">Footer</h1>
+<footer>
+    <div id="footer-container" class="link-style">
+        <div>
+            © Keshav Mathur. All Rights Reserved
+        </div>
+        <div class="links-container-ft">
+            <div class="link-style">
+                <a href="/">Home</a>
+            <% if(locals.user) {%>
+                <a href="/students">Students</a>
+                <a href="/companies">Companies</a>
+            <%}%>
+            </div>
+        </div>
+    </div>
+</footer>

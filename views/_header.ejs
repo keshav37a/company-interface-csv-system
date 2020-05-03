@@ -1,4 +1,18 @@
-<link rel="stylesheet" type="text/css" href="/css/header.css">
-<a href="/users/sign-out">Sign Out</a>
-<a href="/students">Home</a>
-<h1 class="header">Header</h1>
+<header>
+    <% 
+        if(locals.user) 
+        { %>
+            <div class="links-container">
+                <div><a href="/users/profile/?uId=<%=user._id%>"><%= user.name %></a></div>
+                <div><a href="/users/sign-out">Sign Out</a></div>
+            </div>
+        <%} 
+        else 
+        { %>
+            <div class="links-container">
+                <div><a href="/users/sign-in">Sign In</a></div>
+                <div><a href="/users/sign-up">Sign Up</a></div>
+            </div>
+        <% } 
+    %>
+</header>
