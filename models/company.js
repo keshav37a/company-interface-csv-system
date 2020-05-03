@@ -5,10 +5,6 @@ const companySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    job_profile:{
-        type: String,
-        required: true
-    },
     hr_email:{
         type: String,
         required: true

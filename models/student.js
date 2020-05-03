@@ -28,7 +28,7 @@ const studentSchema = new mongoose.Schema({
     },
     interview_scheduled_with_companies:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'company'
+        ref: 'interview'
     }],
     selected_in_companies:[{
         type: mongoose.Schema.Types.ObjectId,

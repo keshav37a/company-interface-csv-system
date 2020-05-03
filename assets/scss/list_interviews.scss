@@ -1,0 +1,47 @@
+body{
+    main{
+        background-color: grey;
+
+        #btn-add-interview{
+            text-align: center;
+        }
+
+        .interview-container{
+            margin: 0.5rem;
+            background-color: orange;
+            display: flex;
+            flex-direction: column;
+
+            .single-interview-container{
+                margin: 0.5rem;
+                background-color: pink;
+                display: flex;
+                flex-direction: row;
+
+                .nam-bat-id-container{
+                    background-color: brown;
+                    display: flex;
+                    flex-direction: column;
+                    flex-grow: 1;
+
+                    .text-1{
+                        margin: 0.25rem;
+                    }
+                    .text-2{
+                        margin: 0.5rem;
+                    }
+                }
+                .actions-container{
+                    display: flex;
+                    flex-direction: column;
+                    background-color: grey;
+
+                    .action-1{
+                        margin: 0.5rem;
+                    }
+
+                }
+            }
+        }
+    }
+}

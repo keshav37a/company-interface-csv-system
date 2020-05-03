@@ -6,5 +6,6 @@ router.get('/', homeController.home);
 router.use('/users', require('./users'));
 router.use('/students', require('./students'));
 router.use('/companies', require('./companies'));
+router.use('/interviews', require('./interviews'));
 
 module.exports = router;

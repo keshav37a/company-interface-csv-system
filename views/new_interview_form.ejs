@@ -1,0 +1,56 @@
+<link rel="stylesheet" type="text/css" href="/css/new_interview_form.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+<script type="text/javascript" src="/js/new_interview_form.js"></script>
+
+<main>
+    <div class="forms-container">
+        <div id="new-interview-div">
+            <form action="/interviews/create-interview" method="POST" id="new-interview-form">
+                <div class="welcome-txt">Add New interview</div>
+                <label for="interview-select">Company Name</label>
+                <select name="company-name" id="interview-select" class="input-initial" name="company-name">
+                    <% 
+                        for(let option of companies)
+                        {%> 
+                            <option value="<%= option.name%>"><%= option.name %></option>    
+                        <%}
+                    %> 
+                </select>
+                <label for="job-profile-select">Job Profile</label>
+                <select name="job-profile" id="job-profile-select" class="input-initial">
+                    <option value="Not Specified">Choose JD</option>
+                    <option value="SDE-1">SDE-1</option>
+                    <option value="SDE-2">SDE-2</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="NodeJS">NodeJS</option>
+                    <option value="React">React</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Full Stack Web Development">Full Stack Web Development</option>
+                    <option value="Android">Android</option>
+                </select>
+                <label for="student-select">Students</label>
+                <select name="students" id="student-select" class="input-initial" multiple name="students">
+                    <% 
+                        for(let option of students)
+                        {%> 
+                            <option value="<%= option.name%>"><%= option.name %></option>    
+                        <%}
+                    %> 
+                </select>
+                <div id="calendar-container" class="flex col start mr1">
+                    <div class="headers ml1">Interview Date</div>
+                    <div><input type="text" id="calendar" class="input-fields ml1" name="date" required /></div>
+                </div>
+                <button id="btn-new-interview" type="submit">Add interview</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+
