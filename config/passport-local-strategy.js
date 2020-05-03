@@ -70,7 +70,7 @@ passport.checkAuthentication = function(req, res, next){
 
     //If the user is not signed in
     console.log('checkAuthentication - Not Authenticated');
-    return res.redirect('/users/signin');
+    return res.redirect('/users/sign-in');
 }
 
 //
