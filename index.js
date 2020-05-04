@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const port = 8000;
-const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
+const expressLayouts = require('express-ejs-layouts');
+const moment = require('moment');
 // console.log('index>moment: ', moment('2020-04-01 11:46:38.339Z').format('DD MMMM YYYY, hh:mm a'));
 
 //used for session cookie
