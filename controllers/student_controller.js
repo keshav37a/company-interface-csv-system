@@ -1,5 +1,6 @@
 const Student = require('../models/student');
 const CourseScore = require('../models/course_score');
+const Interview = require('../models/interview');
 
 module.exports.home = async function(req, res){
     console.log('student in student_controller called');
@@ -49,4 +50,38 @@ module.exports.createStudentRequest = async function(req, res){
     }
 }
 
-
+module.exports.getDataForDropdown = async function(req, res){
+    try{
+        console.log('In getDataForDropdown');
+        let studentId = req.params.id;
+        if(studentId=="none"){
+            let interviews = await Interview.find().populate('company');
+            console.log('backend: ', interviews);
+            return res.status(200).json({
+                data: interviews,
+                message: 'not found'
+            });    
+        }
+        let foundStudent = await Student.findById(studentId).populate({path: 'interview_scheduled_with_companies', populate: {path: 'company'}}).populate('selected_in_companies');
+        if(foundStudent){
+            console.log(foundStudent);
+            return res.status(200).json({
+                data: foundStudent,
+                message: 'student found'
+            });    
+        }
+        else{
+            console.log('Student not found');
+            return res.status(404).json({
+                data: -1,
+                message: 'student not found'
+            });    
+        }
+    }
+    catch(err){
+        return res.status(500).json({
+            data:-1,
+            message: err
+        });    
+    }
+}

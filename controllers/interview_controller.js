@@ -131,7 +131,6 @@ module.exports.addStudentToInterviewRequest = async function(req, res){
 
             for(let i=0; i<addStudentsArray.length; i++){
                 let student = addStudentsArray[i];
-                console.log('in block to add interview to student');
                 student.interview_scheduled_with_companies.push(interview);
                 await student.save();
             }

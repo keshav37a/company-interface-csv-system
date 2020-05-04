@@ -5,11 +5,16 @@ const { Parser } = require('json2csv');
 const moment = require('moment');
 
 module.exports.home = async function(req, res){
-    console.log('home in result_controller called');
-    let results = await Result.find({}).populate({path:'student', populate:{path:'course_score'}}).populate({path: 'interview', populate: { path: 'company' }});
-    console.log(results);
-    console.log(results[0].interview.company);
-    return res.render('list_results', {title: 'results', results: results});
+    try{
+        console.log('home in result_controller called');
+        let results = await Result.find({}).populate({path:'student', populate:{path:'course_score'}}).populate({path: 'interview', populate: { path: 'company' }});
+        console.log(results);
+        return res.render('list_results', {title: 'results', results: results});
+    }
+    catch(err){
+        return res.render('/students');
+    }
+    
 }
 
 module.exports.newResultRender = async function(req, res){
@@ -17,7 +22,6 @@ module.exports.newResultRender = async function(req, res){
         console.log('newResultRender in result_controller called');
         let students = await Student.find();
         let interviews = await Interview.find().populate('company');
-        console.log(interviews);
         return res.render('new_result_form', {title:'New Interview Form', students: students, interviews:interviews});
     }
     catch(err){
