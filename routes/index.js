@@ -9,5 +9,6 @@ router.use('/students', require('./students'));
 router.use('/companies', require('./companies'));
 router.use('/interviews', require('./interviews'));
 router.use('/results', require('./results'));
+router.use('/external', require('./external'));
 
 module.exports = router;
