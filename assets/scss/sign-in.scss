@@ -9,6 +9,7 @@ body{
             background-color: #FFFFFF;
             width: 20rem;
             border-radius: 25px;
+            min-height: 100vh;
 
             .welcome-txt{
                 font-family: Arial, Helvetica, sans-serif;
@@ -27,6 +28,7 @@ body{
                 width: 90%;
                 font-family: Arial, Helvetica, sans-serif;
                 font-size: 0.75rem;
+                margin-top: 2rem;
 
                 #check-sign-in{
                     height: 1rem;
@@ -36,6 +38,7 @@ body{
             #btn-sign-in{
                 background-color:#567FF3;
                 color: #FFFFFF;
+                margin-top: 2rem;
                 margin-bottom: 1rem;
                 border: none;
             }

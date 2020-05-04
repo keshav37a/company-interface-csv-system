@@ -1,3 +1,4 @@
+
 <header>
     <% 
         if(locals.user) 
@@ -5,6 +6,12 @@
             <div class="links-container">
                 <div><a href="/users/profile/?uId=<%=user._id%>"><%= user.name %></a></div>
                 <div><a href="/users/sign-out">Sign Out</a></div>
+            </div>
+            <div class="links-container action-forms-container">
+                <div id="btn-add-student"><a href="/students/new-student">Add Student</a></div>
+                <div id="btn-add-student"><a href="/companies/new-company">Add Company</a></div>
+                <div id="btn-add-student"><a href="/interviews/new-interview">Add Interview</a></div>
+                <div id="btn-add-student"><a href="/results/new-result">Add Result</a></div>
             </div>
         <%} 
         else 

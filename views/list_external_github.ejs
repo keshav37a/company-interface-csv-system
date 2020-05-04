@@ -3,32 +3,22 @@
     <div class="heading">Github Jobs Api</div>
     <div class="job-container">
         <% 
-            for(let i=0; i<5 && i<jobs.length; i++)  
+            for(let i=0; i<jobs.length; i++)  
             {%> 
                 <div class="single-job-container">
                     <div class="img-div">
                         <img src="<%= jobs[i].company_logo%>" alt="">
                     </div>
                     <div class="short-req-container">
-                        <div><%=jobs[i].company%></div>
-                        <div><%=jobs[i].title%></div>
-                        <div><%=jobs[i].location%></div>
+                        <div class="company-name"><%=jobs[i].company%></div>
+                        <div class="job-title"><%=jobs[i].title%></div>
+                        <div class="job-location"><%=jobs[i].location%></div>
                     </div>
                     <div class="job-description">
                         <div><%=jobs[i].description%></div>
                     </div>
                 </div>
             <%}
-        %>
-    </div>
-    <div class="pagination-container">
-        <%
-            for(let i=0; i<(jobs.length)/5; i++)  
-            {%> 
-                <div class="pagination-number">
-                    <a href=""><%=i%></a>
-                </div>
-            <%}     
         %>
     </div>
 </main>

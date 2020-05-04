@@ -6,7 +6,8 @@ body {
     body main .forms-container {
       display: flex;
       flex-direction: row;
-      justify-content: center; }
+      justify-content: center;
+      min-height: 100vh; }
       body main .forms-container #new-student-div {
         background-color: #FFFFFF;
         width: 20rem;

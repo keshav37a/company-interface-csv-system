@@ -14,13 +14,8 @@ module.exports.github = async function (req, res) {
                 .replace(/(&ldquo;)|(&rdquo;)/g, '"');
             resArr.push(resObj);
         }
-        // console.log(responseData);    
         if(responseData){
             return res.render('list_external_github', {jobs:resArr, title:'Github Jobs'});
-            // return res.status(200).json({
-            //     data: responseData,
-            //     message: 'Successfully retrieved data'
-            // });
         }    
         else{
             return res.redirect('/students');

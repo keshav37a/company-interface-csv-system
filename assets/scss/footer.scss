@@ -1,4 +1,8 @@
 #footer-container{
+    position: absolute;
+    width: 98.8%;
+    bottom: 0;
+    position: sticky;
     display: flex;
     flex-direction: row;
     align-items: start;

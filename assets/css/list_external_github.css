@@ -7,6 +7,7 @@ body main {
     margin: 1rem;
     letter-spacing: 0.5; }
   body main .job-container {
+    min-height: 100vh;
     display: flex;
     flex-direction: column; }
     body main .job-container .single-job-container {
@@ -28,7 +29,8 @@ body main {
         flex-grow: 1;
         min-width: 10rem; }
       body main .job-container .single-job-container .job-description {
-        margin-left: 2rem; }
+        margin-left: 2rem;
+        text-align: justify; }
   body main .pagination-container {
     display: flex;
     flex-direction: row;

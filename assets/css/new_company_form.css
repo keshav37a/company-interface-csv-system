@@ -4,6 +4,7 @@ body {
   body main {
     height: 100%; }
     body main .forms-container {
+      min-height: 100vh;
       display: flex;
       flex-direction: row;
       justify-content: center; }

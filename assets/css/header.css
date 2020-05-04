@@ -5,13 +5,15 @@ body {
     body header .links-container {
       display: flex;
       flex-direction: row;
-      justify-content: start; }
+      justify-content: start;
+      margin-bottom: 1rem; }
       body header .links-container div {
         margin-left: 1rem; }
         body header .links-container div a {
           color: #FFFFFF;
           font-weight: 300;
-          text-decoration: none; }
+          text-decoration: none;
+          font-family: sans-serif; }
 
 #header-container {
   background-color: #0680FD;

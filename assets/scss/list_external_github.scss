@@ -11,6 +11,7 @@ body{
         }
 
         .job-container{
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
 
@@ -39,6 +40,7 @@ body{
                 }
                 .job-description{
                     margin-left: 2rem;
+                    text-align:justify
                 }
             }
         }

@@ -1,2 +1,4 @@
 body {
-  background-color: darkcyan; }
+  background-color: darkcyan;
+  position: relative;
+  min-height: 100vh; }

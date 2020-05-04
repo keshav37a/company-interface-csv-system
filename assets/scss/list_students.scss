@@ -7,6 +7,7 @@ body{
         }
 
         .students-container{
+            min-height: 100vh;
             margin: 0.5rem;
             background-color: orange;
             display: flex;

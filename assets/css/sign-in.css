@@ -6,7 +6,8 @@ body {
     body .main #sign-in-div {
       background-color: #FFFFFF;
       width: 20rem;
-      border-radius: 25px; }
+      border-radius: 25px;
+      min-height: 100vh; }
       body .main #sign-in-div .welcome-txt {
         font-family: Arial, Helvetica, sans-serif;
         font-weight: 600;
@@ -19,13 +20,15 @@ body {
       body .main #sign-in-div #check-sign-in-container {
         width: 90%;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.75rem; }
+        font-size: 0.75rem;
+        margin-top: 2rem; }
         body .main #sign-in-div #check-sign-in-container #check-sign-in {
           height: 1rem;
           width: 1rem; }
       body .main #sign-in-div #btn-sign-in {
         background-color: #567FF3;
         color: #FFFFFF;
+        margin-top: 2rem;
         margin-bottom: 1rem;
         border: none; }
   body .link-desc {

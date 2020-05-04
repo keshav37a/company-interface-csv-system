@@ -3,6 +3,7 @@ body main {
   body main #btn-add-result {
     text-align: center; }
   body main .result-container {
+    min-height: 100vh;
     margin: 0.5rem;
     background-color: orange;
     display: flex;
