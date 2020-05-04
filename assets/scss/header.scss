@@ -1,12 +1,20 @@
 body{
     margin: 0;
-    header{
-        background-color: #989FBB;
+    #header-container{
+        background-color: #747474;
+        margin-bottom: 1rem;
+
         .links-container{
+            background-color: #747474;
             display: flex;
             flex-direction: row;
             justify-content: start;
-            margin-bottom: 1rem;
+
+            .action-form-container{
+                display: flex;
+                flex-direction: column;
+                
+            }
             div{
                 margin-left: 1rem;
                 a{
@@ -17,6 +25,7 @@ body{
                 }
             }
         }    
+        
         
     }
 }
@@ -33,3 +42,6 @@ body{
     font-size: 1.5rem;
 }
 
+.grow{
+    flex-grow: 1;
+}
