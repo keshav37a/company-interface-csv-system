@@ -18,7 +18,8 @@ body main {
       body main .interview-container .single-interview-container .nam-bat-id-container {
         display: flex;
         flex-direction: column;
-        background-color: #F96167; }
+        background-color: #F96167;
+        min-width: 15rem; }
         body main .interview-container .single-interview-container .nam-bat-id-container .text-1 {
           margin: 0.25rem; }
         body main .interview-container .single-interview-container .nam-bat-id-container .text-2 {

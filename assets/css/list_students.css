@@ -18,7 +18,8 @@ body main {
       body main .students-container .single-student-container .nam-bat-id-container {
         background-color: #F96167;
         display: flex;
-        flex-direction: column; }
+        flex-direction: column;
+        min-width: 15rem; }
         body main .students-container .single-student-container .nam-bat-id-container .text-1 {
           margin: 0.25rem; }
         body main .students-container .single-student-container .nam-bat-id-container .text-2 {
