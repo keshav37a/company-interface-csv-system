@@ -64,7 +64,7 @@ module.exports.getDataForDropdown = async function(req, res){
         }
         let foundStudent = await Student.findById(studentId).populate({path: 'interview_scheduled_with_companies', populate: {path: 'company'}}).populate('selected_in_companies');
         if(foundStudent){
-            console.log(foundStudent);
+            // console.log(foundStudent);
             return res.status(200).json({
                 data: foundStudent,
                 message: 'student found'
