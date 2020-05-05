@@ -29,25 +29,36 @@ module.exports.newInterviewRender = async function(req, res){
 module.exports.createInterviewRequest = async function(req, res){
     try{
         console.log('createInterviewRequest in interview_controller called');
-        let company = await Company.findOne({name: req.body['company-name']});
-        // console.log(req.body);
+        console.log('req.body', req.body);
+        let company = await Company.findById(req.body['company-id']);
+        
+        //Checking to see if an interview by that company id already exists
         let interview = await Interview.findOne({company:company._id});
         if(interview){
             req.flash('error', 'Interview already exists');
             return res.redirect('back');
         }
         else{
-            let studentArrayFromReq = req.body['students'];
+            let studentArrayFromReq = [];
+            if(Array.isArray(req.body['students'])){
+                studentArrayFromReq = req.body['students'];
+            }
+            else{
+                studentArrayFromReq.push(req.body['students']);
+            }
+
+            console.log('studentArrayFromReq', studentArrayFromReq);
             let studentArrayFromDB = [];
             let studentIdFromDB=[];
 
             if(studentArrayFromReq!=undefined){
                 for(let i=0; i<studentArrayFromReq.length; i++){
-                    let studentName = studentArrayFromReq[i];
-                    let student = await Student.findOne({name: studentName});
-                    if(student){
-                        studentArrayFromDB.push(student);
-                        studentIdFromDB.push(student._id);
+                    let studentId = studentArrayFromReq[i];
+                    let studentObj = await Student.findById(studentId);
+                    if(studentObj){
+                        console.log('student found in db', studentObj);
+                        studentArrayFromDB.push(studentObj);
+                        studentIdFromDB.push(studentObj._id);
                     }
                 }
             }

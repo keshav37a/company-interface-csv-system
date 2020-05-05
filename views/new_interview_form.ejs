@@ -13,11 +13,11 @@
             <form action="/interviews/create-interview" method="POST" id="new-interview-form">
                 <div class="welcome-txt">Add New interview</div>
                 <label for="interview-select">Company Name</label>
-                <select name="company-name" id="interview-select" class="input-initial" name="company-name">
+                <select name="company-id" id="interview-select" class="input-initial" name="company-name">
                     <% 
                         for(let option of companies)
                         {%> 
-                            <option value="<%= option.name%>"><%= option.name %></option>    
+                            <option value="<%= option._id%>"><%= option.name %></option>    
                         <%}
                     %> 
                 </select>
@@ -39,7 +39,7 @@
                     <% 
                         for(let option of students)
                         {%> 
-                            <option class="input-initial"value="<%= option.name%>"><%= option.name %></option>    
+                            <option class="input-initial"value="<%= option._id%>"><%= option.name %></option>    
                         <%}
                     %> 
                 </select>

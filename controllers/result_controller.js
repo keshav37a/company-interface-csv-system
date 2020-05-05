@@ -78,20 +78,24 @@ module.exports.createResultRequest = async function(req, res){
 
         if(boolInterview && boolStudent){
             //student me se interview nikal
-            // await selectedStudent.update({$pull: {interviews_scheduled_with_companies: {$in : [interviewId]}}});
+            console.log('interviewidToBePulled', interviewId);
+            await selectedStudent.updateOne({$pull: {'interview_scheduled_with_companies': {$in : [interviewId.toString()]}}});
 
             //interview me se student nikal
             // await interview.update({$pull: {interviews_scheduled_with_companies: {$in : [interviewId]}}});
             console.log("Both true");
 
-            selectedStudent.selected_in_companies.push(interviewId);
-            if(resultCode.toLowerCase()=='pass'){
+            if(resultString.toLowerCase()=='pass'){
+                selectedStudent.interview_cleared_with_companies.push(interviewId);
                 selectedStudent.placement_status = true;
             }
-            await selectedStudent.save();
 
             //add items to result
             let newResult = await Result.create({student: selectedStudent._id, interview: selectedInterview._id, status: req.body.result});
+            selectedStudent.results.push(newResult);
+            await selectedStudent.save();
+            
+
             req.flash('success', 'Result added successfully');
         }
         // console.log(interviews);

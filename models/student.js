@@ -30,9 +30,13 @@ const studentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'interviews'
     }],
-    selected_in_companies:[{
+    interview_cleared_with_companies:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'interviews'
+    }],
+    results:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'results'
     }]
 }, {
     timestamps : true

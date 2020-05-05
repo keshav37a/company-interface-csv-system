@@ -4,7 +4,8 @@ body main #btn-add-result {
 body main .result-container {
   min-height: 100vh;
   margin: 0.5rem;
-  background-color: #FAD744;
+  font-family: sans-serif;
+  background-color: #FCE77D;
   display: flex;
   flex-direction: column; }
   body main .result-container .header-container {

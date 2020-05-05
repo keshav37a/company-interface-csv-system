@@ -64,7 +64,7 @@ module.exports.getDataForDropdown = async function(req, res){
                 message: 'not found'
             });    
         }
-        let foundStudent = await Student.findById(studentId).populate({path: 'interview_scheduled_with_companies', populate: {path: 'company'}}).populate('selected_in_companies');
+        let foundStudent = await Student.findById(studentId).populate({path: 'interview_scheduled_with_companies', populate: {path: 'company'}}).populate('interview_cleared_with_companies');
         if(foundStudent){
             // console.log(foundStudent);
             return res.status(200).json({
