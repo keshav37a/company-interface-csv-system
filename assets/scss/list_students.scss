@@ -1,6 +1,7 @@
 body{
     main{
-        background-color: #989FBB;
+        background-color: #FAD744;
+        font-family: sans-serif;
 
         #btn-add-student{
             text-align: center;
@@ -9,19 +10,19 @@ body{
         .students-container{
             min-height: 100vh;
             margin: 0.5rem;
-            background-color: orange;
+            font-size: 0.8rem;
             display: flex;
             flex-direction: column;
 
             .single-student-container{
                 margin: 0.5rem;
-                background-color: pink;
+                background-color: #FCE77D;
                 display: flex;
                 flex-direction: row;
                 justify-content: start;
 
                 .nam-bat-id-container{
-                    background-color: brown;
+                    background-color: #F96167;
                     display: flex;
                     flex-direction: column;
 
@@ -33,11 +34,11 @@ body{
                     }
                 }
                 .interviews-container{
-                    overflow-y: scroll;   
+                    overflow-y: hidden;   
                     flex-grow: 1;
 
                     .single-interview-container{
-                        background-color: lightblue;
+                        // background-color: lightblue;
                         display: flex;
                         flex-direction: row;
                         margin-bottom: 1rem;
@@ -50,7 +51,7 @@ body{
                 .actions-container{
                     display: flex;
                     flex-direction: column;
-                    background-color: grey;
+                    // background-color: grey;
 
                     .action-1{
                         margin: 0.5rem;

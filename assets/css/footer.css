@@ -6,17 +6,17 @@
   display: flex;
   flex-direction: row;
   align-items: start;
-  background-color: #747474;
-  color: #FFFFFF;
+  background-color: #2B3252;
   padding: 0.5rem;
-  margin-top: 1rem; }
+  margin-top: 1rem;
+  color: #FAD744; }
   #footer-container .links-container-ft {
     display: flex;
     flex-direction: column;
     align-items: start; }
     #footer-container .links-container-ft a {
       text-decoration: none;
-      color: #FFFFFF;
+      color: #FAD744;
       margin-left: 2rem; }
   #footer-container .link-style {
     font-family: sans-serif;

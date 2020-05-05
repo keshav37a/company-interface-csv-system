@@ -1,45 +1,44 @@
-body main {
-  background-color: grey; }
-  body main #btn-add-result {
-    text-align: center; }
-  body main .result-container {
-    min-height: 100vh;
-    margin: 0.5rem;
-    background-color: orange;
+body main #btn-add-result {
+  text-align: center; }
+
+body main .result-container {
+  min-height: 100vh;
+  margin: 0.5rem;
+  background-color: #FAD744;
+  display: flex;
+  flex-direction: column; }
+  body main .result-container .header-container {
     display: flex;
-    flex-direction: column; }
-    body main .result-container .header-container {
+    flex-direction: row;
+    justify-content: space-evenly; }
+  body main .result-container .table-td {
+    text-align: center; }
+  body main .result-container .single-result-container {
+    margin: 0.5rem;
+    background-color: pink;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    max-height: 5rem; }
+    body main .result-container .single-result-container .nam-bat-id-container {
+      background-color: brown;
       display: flex;
-      flex-direction: row;
-      justify-content: space-evenly; }
-    body main .result-container .table-td {
-      text-align: center; }
-    body main .result-container .single-result-container {
-      margin: 0.5rem;
-      background-color: pink;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      max-height: 5rem; }
-      body main .result-container .single-result-container .nam-bat-id-container {
-        background-color: brown;
-        display: flex;
-        flex-direction: column; }
-        body main .result-container .single-result-container .nam-bat-id-container .text-1 {
-          margin: 0.25rem; }
-        body main .result-container .single-result-container .nam-bat-id-container .text-2 {
-          margin: 0.5rem; }
-      body main .result-container .single-result-container .students-container {
-        overflow-y: scroll;
-        flex-grow: 1; }
-        body main .result-container .single-result-container .students-container .single-student-container {
-          background-color: lightblue;
-          display: flex;
-          flex-direction: column;
-          margin-bottom: 1rem; }
-      body main .result-container .single-result-container .actions-container {
+      flex-direction: column; }
+      body main .result-container .single-result-container .nam-bat-id-container .text-1 {
+        margin: 0.25rem; }
+      body main .result-container .single-result-container .nam-bat-id-container .text-2 {
+        margin: 0.5rem; }
+    body main .result-container .single-result-container .students-container {
+      overflow-y: scroll;
+      flex-grow: 1; }
+      body main .result-container .single-result-container .students-container .single-student-container {
+        background-color: lightblue;
         display: flex;
         flex-direction: column;
-        background-color: grey; }
-        body main .result-container .single-result-container .actions-container .action-1 {
-          margin: 0.5rem; }
+        margin-bottom: 1rem; }
+    body main .result-container .single-result-container .actions-container {
+      display: flex;
+      flex-direction: column;
+      background-color: grey; }
+      body main .result-container .single-result-container .actions-container .action-1 {
+        margin: 0.5rem; }

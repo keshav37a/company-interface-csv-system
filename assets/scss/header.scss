@@ -1,11 +1,12 @@
 body{
     margin: 0;
+    background-color: #FAD744;
     #header-container{
-        background-color: #747474;
+        background-color: #2B3252;
+        color: #FAD744;;
         margin-bottom: 1rem;
 
         .links-container{
-            background-color: #747474;
             display: flex;
             flex-direction: row;
             justify-content: start;
@@ -18,7 +19,7 @@ body{
             div{
                 margin-left: 1rem;
                 a{
-                    color: #FFFFFF;
+                    color: #FAD744;;
                     font-weight: 300;
                     text-decoration: none;
                     font-family: sans-serif;

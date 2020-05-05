@@ -1,30 +1,30 @@
-body main {
-  background-color: grey; }
-  body main #btn-add-company {
-    text-align: center; }
-  body main .company-container {
-    min-height: 100vh;
+body main #btn-add-company {
+  text-align: center; }
+
+body main .company-container {
+  min-height: 100vh;
+  margin: 0.5rem;
+  background-color: #FAD744;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem; }
+  body main .company-container .single-company-container {
     margin: 0.5rem;
-    background-color: orange;
+    background-color: #FCE77D;
     display: flex;
-    flex-direction: column; }
-    body main .company-container .single-company-container {
-      margin: 0.5rem;
-      background-color: pink;
+    flex-direction: row; }
+    body main .company-container .single-company-container .nam-bat-id-container {
+      background-color: #F96167;
       display: flex;
-      flex-direction: row; }
-      body main .company-container .single-company-container .nam-bat-id-container {
-        background-color: brown;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1; }
-        body main .company-container .single-company-container .nam-bat-id-container .text-1 {
-          margin: 0.25rem; }
-        body main .company-container .single-company-container .nam-bat-id-container .text-2 {
-          margin: 0.5rem; }
-      body main .company-container .single-company-container .actions-container {
-        display: flex;
-        flex-direction: column;
-        background-color: grey; }
-        body main .company-container .single-company-container .actions-container .action-1 {
-          margin: 0.5rem; }
+      flex-direction: column; }
+      body main .company-container .single-company-container .nam-bat-id-container .text-1 {
+        margin: 0.25rem; }
+      body main .company-container .single-company-container .nam-bat-id-container .text-2 {
+        margin: 0.5rem; }
+    body main .company-container .single-company-container .div-container {
+      flex-grow: 1; }
+    body main .company-container .single-company-container .actions-container {
+      display: flex;
+      flex-direction: column; }
+      body main .company-container .single-company-container .actions-container .action-1 {
+        margin: 0.5rem; }
