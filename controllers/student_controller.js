@@ -1,6 +1,8 @@
 const Student = require('../models/student');
 const CourseScore = require('../models/course_score');
 const Interview = require('../models/interview');
+const Result = require('../models/result');
+const StatusEnums = require('../config/status_enums');
 
 module.exports.home = async function(req, res){
     console.log('student in student_controller called');
@@ -168,4 +170,81 @@ module.exports.addInterviewToStudentRequest = async function(req, res){
         req.flash('error', 'Internal Server Error');
         return res.redirect('back');
     }
+}
+
+module.exports.addResultToStudentWithCompanyRequest = async function(req, res){
+    try{
+        console.log('addResultToStudentWithCompanyRequest in result_controller called');
+        console.log('req.query', req.query);
+        console.log('req.body', req.body);
+        
+        // console.log(req.body);
+
+        let studentId = req.query.sid;
+        let interviewId = req.query.iid;
+
+        let boolStudent = false;
+        let boolInterview = false;
+        //enums mapping has been done in config. Used to get the status from the number
+        let resultCode = req.body.result;
+        let resultString = StatusEnums[resultCode]; 
+        req.body.result = resultString
+        // let result = req.body.result;
+
+        let selectedStudent = await Student.findById(studentId);
+        if(selectedStudent)
+            boolStudent = true;
+
+        let selectedInterview = await Interview.findById(interviewId);
+        if(selectedInterview)
+            boolInterview = true;
+
+        //If result for that particular interview and student has been added
+        let resultsByStudentId = await Result.find({student: selectedStudent._id}).populate('interview');
+        console.log('resultsByStudentId', resultsByStudentId);
+
+        for(let i=0; i<resultsByStudentId.length; i++){
+            let result = resultsByStudentId[i];
+            console.log(result.interview._id);
+            console.log(selectedInterview._id);
+            if(result.interview._id.toString() == selectedInterview._id.toString()){
+                req.flash('error', 'Result for this student and interview have already been added');
+                return res.redirect('back');
+            }
+        }
+
+        console.log(boolStudent);
+        console.log(boolInterview);
+
+        if(boolInterview && boolStudent){
+            //student me se interview nikal
+            console.log('interviewidToBePulled', interviewId);
+            await selectedStudent.updateOne({$pull: {'interview_scheduled_with_companies': {$in : [interviewId.toString()]}}});
+
+            //interview me se student nikal
+            // await interview.update({$pull: {interviews_scheduled_with_companies: {$in : [interviewId]}}});
+            console.log("Both true");
+
+            if(resultString.toLowerCase()=='pass'){
+                selectedStudent.interview_cleared_with_companies.push(interviewId);
+                selectedStudent.placement_status = true;
+            }
+
+            //add items to result
+            let newResult = await Result.create({student: selectedStudent._id, interview: selectedInterview._id, status: req.body.result});
+            selectedStudent.results.push(newResult);
+            await selectedStudent.save();
+            
+
+            req.flash('success', 'Result added successfully');
+        }
+        // console.log(interviews);
+        return res.redirect('back');
+    }
+    catch(err){
+        console.log(`${err}`);
+        req.flash('error', 'Internal Server Error');
+        return res.redirect('back');
+    }    
+
 }

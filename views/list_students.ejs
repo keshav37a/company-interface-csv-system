@@ -19,6 +19,16 @@
                                 <div class="single-interview-container">
                                     <div class="text-3"><%= interview.company.name %></div>
                                     <div class="text-3 date"><%= interview.interview_date %></div>
+                                    <form method="POST" action="/students/add-result/?sid=<%=student._id%>&iid=<%=interview._id%>">
+                                        <select name="result" id="result-select" class="input-initial">
+                                            <option value="none">Select Result</option>
+                                            <option value="0">Pass</option>
+                                            <option value="1">Fail</option>
+                                            <option value="2">On Hold</option>
+                                            <option value="3">Didn't Attempt</option>
+                                        </select>
+                                        <button id="btn-new-result" type="submit">Add Result</button>    
+                                    </form>
                                 </div>      
                             <%}
                         %>

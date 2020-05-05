@@ -10,5 +10,6 @@ router.get('/:id/new-interview', passport.checkAuthentication, studentController
 
 router.post('/:id/add-interview', passport.checkAuthentication,studentController.addInterviewToStudentRequest);
 router.post('/create-student', passport.checkAuthentication, studentController.createStudentRequest);
+router.post('/add-result', passport.checkAuthentication, studentController.addResultToStudentWithCompanyRequest);
 
 module.exports = router;
