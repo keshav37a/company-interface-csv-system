@@ -1,5 +1,5 @@
 body main {
-  background-color: #FAD744;
+  background-color: #FCE77D;
   font-family: sans-serif; }
   body main #btn-add-student {
     text-align: center; }
@@ -11,12 +11,12 @@ body main {
     flex-direction: column; }
     body main .students-container .single-student-container {
       margin: 0.5rem;
-      background-color: #FCE77D;
+      background-color: #FEFCD7;
       display: flex;
       flex-direction: row;
       justify-content: start; }
       body main .students-container .single-student-container .nam-bat-id-container {
-        background-color: #F96167;
+        background-color: #FFCF79;
         display: flex;
         flex-direction: column;
         min-width: 15rem; }

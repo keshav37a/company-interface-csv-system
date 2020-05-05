@@ -92,68 +92,69 @@ module.exports.getDataForDropdown = async function(req, res){
 
 module.exports.addInterviewToStudentRender = async function(req, res){
     let studentId = req.params.id;
-    console.log('home in student_controller called');
+    console.log('addInterviewToStudentRender in student_controller called');
     let interviews = await Interview.find({}).populate('company');
     return res.render('new_interview_to_student_form', {title:'interview List', interviews: interviews, studentId:studentId});
 }
 
 module.exports.addInterviewToStudentRequest = async function(req, res){
     try{
-        console.log('home in student_controller called');
+        console.log('req.body');
         console.log(req.body);
-        console.log(req.params);
-        let studentId = req.params.id;
 
-        let interviewIdsPassedInRequest = req.body.interviews;
+        let studentId = req.params.id;
+        let interviewIdsReqArr = req.body.interviews;
+
         if(!Array.isArray(req.body.interviews)){
-            interviewIdsPassedInRequest = [];
-            interviewIdsPassedInRequest.push(req.body.interviews);
+            interviewIdsReqArr = [];
+            interviewIdsReqArr.push(req.body.interviews);
         }
-        
-        let student = await Student.findById(studentId).populate("interview_scheduled_with_companies").exec();
-        // console.log(interview);
-        console.log(interviewIdsPassedInRequest);
-        if(student){
-            let interviewsPresentlyAllottedToStudent = student.interview_scheduled_with_companies;
-            let addInterviewsArray = [];
-            for(let j=0; j<interviewIdsPassedInRequest.length; j++){
-                let boolFound = false;
-                console.log(interviewIdsPassedInRequest[j]);
-                let reqInterview = await Interview.findById(interviewIdsPassedInRequest[j]).populate('company');
-                console.log(reqInterview);
-                if(reqInterview){
-                    let reqInterviewName = reqInterview.company.name;
-                    console.log(reqInterviewName);
-                    for(let i=0; i<interviewsPresentlyAllottedToStudent.length; i++){
-                        let currentInterviewName = interviewsPresentlyAllottedToStudent[i].company.name;
-                        if(reqInterviewName==currentInterviewName){
-                            boolFound = true;
-                            break;
-                        }
+
+        //Find student from studentId
+        let studentObj = await Student.findById(studentId);
+        console.log('studentObj');
+        if(studentObj){ 
+            let allocatedInterviews = studentObj.interview_scheduled_with_companies;
+            console.log('allocatedInterviews');
+            console.log(allocatedInterviews);
+
+            let isAdded = 0;
+
+            //loop through the interview ids passed to check whether they have already been added or not
+            for(let i=0; i<interviewIdsReqArr.length; i++){
+                let interviewIdReqObj = interviewIdsReqArr[i];
+                let isFound = false;
+                //loop through allocated interviews of the student to check whether they have already been added or not
+                for(let j=0; j<allocatedInterviews.length; j++){
+                    let allocatedInterviewObjId = allocatedInterviews[j];
+                    if(interviewIdReqObj.toString()==allocatedInterviewObjId.toString()){
+                        isFound = true;
+                        console.log(isFound);
+                        req.flash('error', 'Interview already added');
+                        break;
                     }
-                    if(boolFound==false){
-                        let reqInterviewId = reqInterview._id;
-                        student.interview_scheduled_with_companies.push(reqInterviewId);
-                        await student.save();
-                        addInterviewsArray.push(reqInterview);
-                    }        
+                }
+
+                //if not found then add
+                if(isFound==false){
+                    studentObj.interview_scheduled_with_companies.push(interviewIdReqObj);
+                    await studentObj.save();
+                    isAdded++;
                 }
             }
-
-            for(let i=0; i<addInterviewsArray.length; i++){
-                let interview = addInterviewsArray[i];
-                interview.students.push(studentId);
-                await interview.save();
-            }
-            return res.redirect('/students');
+            req.flash('success', `${isAdded} Interviews added for ${studentObj.name}`);
         }
         else{
             req.flash('error', 'Student not found');
-            return res.redirect('/companies');
+            return res.redirect('back');
         }
+        console.log('interviewIdsArr');
+        console.log(interviewIdsReqArr);
+        return res.redirect('back');
     }
     catch(err){
-        console.log(`${err}`);
-        return res.redirect('/companies');
+        console.log(err);
+        req.flash('error', 'Internal Server Error');
+        return res.redirect('back');
     }
 }

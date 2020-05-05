@@ -1,6 +1,7 @@
 body{
     main{
-        background-color: #FAD744;
+        background-color: #FCE77D;
+        
         font-family: sans-serif;
 
         #btn-add-student{
@@ -16,13 +17,13 @@ body{
 
             .single-student-container{
                 margin: 0.5rem;
-                background-color: #FCE77D;
+                background-color: #FEFCD7;
                 display: flex;
                 flex-direction: row;
                 justify-content: start;
 
                 .nam-bat-id-container{
-                    background-color: #F96167;
+                    background-color: #FFCF79;
                     display: flex;
                     flex-direction: column;
                     min-width: 15rem;
