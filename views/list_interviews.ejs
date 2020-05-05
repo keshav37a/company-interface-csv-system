@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/css/list_interviews.css">
+<script src="/js/list_interviews.js"></script>
+<script src="/js/date_format.js"></script>
 <main>
     <div class="interview-container">
 
@@ -9,7 +11,7 @@
                     <div class="nam-bat-id-container">
                         <div class="text-1"><%= interview.company.name %></div>
                         <div class="text-1"><%= interview.job_profile %></div>
-                        <div class="text-2"><%= interview.interview_date %></div>
+                        <div class="text-2 date"><%= interview.interview_date %></div>
                     </div>
                     <div class="students-container">
                         <% 

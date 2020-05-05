@@ -1,6 +1,7 @@
 body main {
   background-color: #FAD744;
-  font-size: 0.9rem; }
+  font-size: 0.8rem;
+  font-family: sans-serif; }
   body main #btn-add-interview {
     text-align: center; }
   body main .interview-container {

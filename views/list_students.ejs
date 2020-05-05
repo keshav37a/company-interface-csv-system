@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/css/list_students.css">
+<script src="/js/list_students.js"></script>
+<script src="/js/date_format.js"></script>
 <main>
     <div class="students-container">
 
@@ -16,7 +18,7 @@
                             for(let interview of student.interview_scheduled_with_companies) {%> 
                                 <div class="single-interview-container">
                                     <div class="text-3"><%= interview.company.name %></div>
-                                    <div class="text-3"><%= interview.interview_date %></div>
+                                    <div class="text-3 date"><%= interview.interview_date %></div>
                                 </div>      
                             <%}
                         %>

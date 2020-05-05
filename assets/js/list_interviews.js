@@ -1,0 +1,1 @@
+console.log('interviews_list script called');

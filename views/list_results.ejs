@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/css/list_results.css">
+<script src="/js/list_results.js"></script>
+<script src="/js/date_format.js"></script>
 <main>
     <div class="result-container">
         <table>
@@ -24,7 +26,7 @@
                         <td class="table-td"><div><%=result.student.course_score.data_structures%></div></td>
                         <td class="table-td"><div><%=result.student.course_score.web_development%></div></td>
                         <td class="table-td"><div><%=result.student.course_score.react%></div></td>
-                        <td class="table-td"><div><%=result.interview.interview_date%></div></td>
+                        <td class="table-td date"><div><%=result.interview.interview_date%></div></td>
                         <td class="table-td"><div><%=result.interview.company.name%></div></td>
                         <td class="table-td"><div><%=result.status%></div></td>
                         <td class="table-td"><div class="actions-container"></div></td>    
