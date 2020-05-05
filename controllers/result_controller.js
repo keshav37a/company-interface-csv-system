@@ -3,6 +3,7 @@ const Interview = require('../models/interview');
 const Result = require('../models/result');
 const { Parser } = require('json2csv');
 const moment = require('moment');
+const StatusEnums = require('../config/status_enums');
 
 module.exports.home = async function(req, res){
     try{
@@ -40,7 +41,11 @@ module.exports.createResultRequest = async function(req, res){
 
         let studentId = req.body.student;
         let interviewId = req.body['interview-name'];
+
+        //enums mapping has been done in config. Used to get the status from the number
         let result = req.body.result;
+        req.body.result = StatusEnums[result];
+        // let result = req.body.result;
 
         let selectedStudent = await Student.findById(studentId);
         if(selectedStudent)
@@ -68,7 +73,7 @@ module.exports.createResultRequest = async function(req, res){
             await selectedStudent.save();
 
             //add items to result
-            let newResult = await Result.create({student: selectedStudent._id, interview: selectedInterview._id, status: result});
+            let newResult = await Result.create({student: selectedStudent._id, interview: selectedInterview._id, status: req.body.result});
 
         }
         // console.log(interviews);
