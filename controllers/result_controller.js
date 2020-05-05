@@ -68,8 +68,8 @@ module.exports.createResultRequest = async function(req, res){
             console.log(result.interview._id);
             console.log(selectedInterview._id);
             if(result.interview._id.toString() == selectedInterview._id.toString()){
-                console.log('Result for this student and interview have already been added');
-                return res.redirect('/results');
+                req.flash('error', 'Result for this student and interview have already been added');
+                return res.redirect('back');
             }
         }
 
@@ -92,13 +92,14 @@ module.exports.createResultRequest = async function(req, res){
 
             //add items to result
             let newResult = await Result.create({student: selectedStudent._id, interview: selectedInterview._id, status: req.body.result});
-
+            req.flash('success', 'Result added successfully');
         }
         // console.log(interviews);
         return res.redirect('/results');
     }
     catch(err){
         console.log(`${err}`);
+        req.flash('error', 'Internal Server Error');
         return res.redirect('/students');
     }    
 }
@@ -144,6 +145,5 @@ module.exports.exportToCsv = async function(req, res){
     catch(err){
         console.log(err);
         return res.redirect('/results');
-    }
-    
+    }    
 }

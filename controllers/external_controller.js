@@ -18,11 +18,13 @@ module.exports.github = async function (req, res) {
             return res.render('list_external_github', {jobs:resArr, title:'Github Jobs'});
         }    
         else{
+            req.flash('error', 'No response recieved. Please try again later');
             return res.redirect('/students');
         }
     } 
     catch(error) {
-          console.error('error occured');
+          console.error(`${err}`);
+          req.flash('error', 'Server error');
           return res.redirect('/students');
     }
 }

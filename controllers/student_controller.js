@@ -20,6 +20,7 @@ module.exports.createStudentRequest = async function(req, res){
         let student = await Student.findOne({email:req.body.email});
         if(student){
             console.log('Student already exists');
+            req.flash('error', 'Student already exists');
             return res.redirect('back');
         }
         else{
@@ -41,11 +42,12 @@ module.exports.createStudentRequest = async function(req, res){
 
             newStudent.course_score = courseScore._id;
             await newStudent.save();
+            req.flash('success', 'Student added Successfully');
             return res.redirect('/students');
         }
     }
     catch(err){
-        console.log(`${err}`);
+        req.flash('error', `Internal Server Error`);
         return res.redirect('/students');
     }
 }
@@ -72,6 +74,7 @@ module.exports.getDataForDropdown = async function(req, res){
         }
         else{
             console.log('Student not found');
+            req.flash('error', 'Student not found');
             return res.status(404).json({
                 data: -1,
                 message: 'student not found'
@@ -135,9 +138,6 @@ module.exports.addInterviewToStudentRequest = async function(req, res){
                         addInterviewsArray.push(reqInterview);
                     }        
                 }
-                else{
-                    console.log('student not found');
-                }
             }
 
             for(let i=0; i<addInterviewsArray.length; i++){
@@ -148,7 +148,7 @@ module.exports.addInterviewToStudentRequest = async function(req, res){
             return res.redirect('/students');
         }
         else{
-            console.log('student by id not found');
+            req.flash('error', 'Student not found');
             return res.redirect('/companies');
         }
     }

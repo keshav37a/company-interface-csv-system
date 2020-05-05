@@ -55,7 +55,7 @@ module.exports.createUserRequest = async function(req, res){
 module.exports.createSessionRequest = function(req, res){
     console.log(req.body);
     let title = "sign-in";
-
+    req.flash('success', 'Logged In Successfully');
     return res.redirect('/students');
 }
 
@@ -63,7 +63,6 @@ module.exports.createSessionRequest = function(req, res){
 module.exports.destroySessionRequest = async function (req, res) {
     console.log('usersController.destroySession');
     await req.logout();
-    // req.flash('success', 'Logged Out Successfully');
-    let title = "sign-in";
+    req.flash('success', 'Logged Out Successfully');
     return res.redirect('/users/sign-in');
 }

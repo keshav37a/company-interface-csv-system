@@ -19,6 +19,7 @@ module.exports.newInterviewRender = async function(req, res){
         return res.render('new_interview_form', {title:'New Interview Form', students: students, companies:companies});
     }
     catch(err){
+        req.flash('error', 'Internal Server Error');
         console.log(`${err}`);
         return res.redirect('/students');
     }
@@ -32,7 +33,7 @@ module.exports.createInterviewRequest = async function(req, res){
         // console.log(req.body);
         let interview = await Interview.findOne({company:company._id});
         if(interview){
-            console.log('interview already exists');
+            req.flash('error', 'Interview already exists');
             return res.redirect('back');
         }
         else{
@@ -66,11 +67,13 @@ module.exports.createInterviewRequest = async function(req, res){
                 student.interview_scheduled_with_companies.push(newInterview._id);
                 await student.save();
             }
+            req.flash('success', 'Interview added Successfully');
             return res.redirect('/interviews');
         }
     }
     catch(err){
         console.log(`${err}`);
+        req.flash('error', 'Internal server error');
         return res.redirect('/companies');
     }
 }
@@ -125,6 +128,7 @@ module.exports.addStudentToInterviewRequest = async function(req, res){
                     }        
                 }
                 else{
+                    req.flash('error', 'Student not found');
                     console.log('student not found');
                 }
             }
@@ -134,6 +138,7 @@ module.exports.addStudentToInterviewRequest = async function(req, res){
                 student.interview_scheduled_with_companies.push(interview);
                 await student.save();
             }
+            req.flash('success', 'Student added successfully');
             return res.redirect('/interviews');
         }
         else{
@@ -143,6 +148,7 @@ module.exports.addStudentToInterviewRequest = async function(req, res){
     }
     catch(err){
         console.log(`${err}`);
+        req.flash('error', 'Internal Server Error');
         return res.redirect('/companies');
     }
 }

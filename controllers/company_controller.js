@@ -17,6 +17,7 @@ module.exports.createcompanyRequest = async function (req, res) {
         let company = await Company.findOne({name:req.body.name});
         if(company){
             console.log('company already exists');
+            req.flash('error', 'Company already exists');
             return res.redirect('back');
         }
         else{
@@ -26,14 +27,14 @@ module.exports.createcompanyRequest = async function (req, res) {
             });
 
             console.log('new newCompany created');
-            // console.log(newCompany);
-
+            req.flash('success', 'Company added successfully');
             return res.redirect('/companies');
         }
     }
     catch(err){
         console.log(`${err}`);
-        return res.redirect('/companies');
+        req.flash('error', 'Internal Server Error');
+        return res.redirect('/back');
     }
 }
 
