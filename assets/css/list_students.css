@@ -1,8 +1,15 @@
 body main {
   background-color: #FCE77D;
   font-family: sans-serif; }
-  body main #btn-add-student {
-    text-align: center; }
+  body main #headers-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-left: 1rem; }
+  body main #student-header-container {
+    min-width: 15rem; }
+  body main #interview-scheduled-header-container {
+    min-width: 15rem; }
   body main .students-container {
     min-height: 100vh;
     margin: 0.5rem;

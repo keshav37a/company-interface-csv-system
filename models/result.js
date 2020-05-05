@@ -18,5 +18,5 @@ const resultSchema = new mongoose.Schema({
 });
 
 //creating and exporting our schema
-const ResultItem = mongoose.model('result', resultSchema);
+const ResultItem = mongoose.model('results', resultSchema);
 module.exports = ResultItem;

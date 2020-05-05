@@ -6,7 +6,7 @@ const StatusEnums = require('../config/status_enums');
 
 module.exports.home = async function(req, res){
     console.log('student in student_controller called');
-    let students = await Student.find().populate({path: 'interview_scheduled_with_companies', populate: { path: 'company' }});
+    let students = await Student.find().populate({path: 'interview_scheduled_with_companies', populate: { path: 'company' }}).populate({path: 'results', populate: { path: 'interview', populate: {path: 'company'} }});
     return res.render('list_students', {title:'Students List', students: students});
 }
 

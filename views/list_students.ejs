@@ -3,7 +3,6 @@
 <script src="/js/date_format.js"></script>
 <main>
     <div class="students-container">
-
         <% 
             for(let student of students)  
             {%> 
@@ -14,6 +13,7 @@
                         <div class="text-2"><%= student._id %></div>
                     </div>
                     <div class="interviews-container">
+                        <div>Interviews Scheduled</div>
                         <% 
                             for(let interview of student.interview_scheduled_with_companies) {%> 
                                 <div class="single-interview-container">
@@ -29,6 +29,18 @@
                                         </select>
                                         <button id="btn-new-result" type="submit">Add Result</button>    
                                     </form>
+                                </div>      
+                            <%}
+                        %>
+                    </div>
+                    <div class="interviews-container">
+                        <div>Results</div>
+                        <% 
+                            for(let result of student.results) {%> 
+                                <div class="single-interview-container">
+                                    <div class="text-3"><%= result.interview.company.name %></div>
+                                    <div class="text-3 date"><%= result.interview.interview_date %></div>
+                                    <div class="text-3"><%= result.status %></div>
                                 </div>      
                             <%}
                         %>
