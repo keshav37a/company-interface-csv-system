@@ -130,19 +130,30 @@ module.exports.addInterviewToStudentRequest = async function(req, res){
                     if(interviewIdReqObj.toString()==allocatedInterviewObjId.toString()){
                         isFound = true;
                         console.log(isFound);
-                        req.flash('error', 'Interview already added');
+                        req.flash('error', 'Interview already added for student');
                         break;
                     }
                 }
 
                 //if not found then add
                 if(isFound==false){
-                    studentObj.interview_scheduled_with_companies.push(interviewIdReqObj);
-                    await studentObj.save();
-                    isAdded++;
+                    let interviewObj = await Interview.findById(interviewIdReqObj);
+                    if(interviewObj){
+                        studentObj.interview_scheduled_with_companies.push(interviewIdReqObj);
+                        interviewObj.students.push(studentObj._id);
+                        await studentObj.save();
+                        await interviewObj.save();
+                        isAdded++;
+                    }
+                    else{
+                        req.flash('error', `Interview not found`);
+                    }
                 }
             }
-            req.flash('success', `${isAdded} Interviews added for ${studentObj.name}`);
+            if(isAdded>0){
+                req.flash('success', `${isAdded} Interviews added for ${studentObj.name}`);
+            }
+            
         }
         else{
             req.flash('error', 'Student not found');
