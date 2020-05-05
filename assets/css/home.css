@@ -1,4 +1,5 @@
 body {
-  background-color: darkcyan;
-  position: relative;
-  min-height: 100vh; }
+  background-color: #FFA500;
+  position: relative; }
+  body .p-height {
+    min-height: 90vh; }

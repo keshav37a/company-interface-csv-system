@@ -11,24 +11,23 @@
                         <div class="text-1"><%= student.batch %></div>
                         <div class="text-2"><%= student._id %></div>
                     </div>
+                    <div class="interviews-container">
+                        <% 
+                            for(let interview of student.interview_scheduled_with_companies) {%> 
+                                <div class="single-interview-container">
+                                    <div class="text-3"><%= interview.company.name %></div>
+                                    <div class="text-3"><%= interview.interview_date %></div>
+                                </div>      
+                            <%}
+                        %>
+                    </div>
                     <div class="actions-container">
-                        <div class="action-1"><button>Add Interview</button></div>
+                        <div class="action-1"><a href="/students/<%=student._id%>/new-interview">Add Interview</a></div>
                         <div class="action-1">More Details</div>
                     </div>
                 </div>
             <%}
         %>
-        <div class="single-student-container">
-            <div class="nam-bat-id-container">
-                <div class="text-1">Keshav Mathur</div>
-                <div class="text-1">Career Camp</div>
-                <div class="text-2">159101071</div>
-            </div>
-            <div class="actions-container">
-                <div class="action-1"><button>Add Interview</button></div>
-                <div class="action-1">More Details</div>
-            </div>
-        </div>
     </div>
 </main>
 <script src="/js/list_students.js"></script>

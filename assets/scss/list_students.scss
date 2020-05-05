@@ -18,18 +18,33 @@ body{
                 background-color: pink;
                 display: flex;
                 flex-direction: row;
+                justify-content: start;
 
                 .nam-bat-id-container{
                     background-color: brown;
                     display: flex;
                     flex-direction: column;
-                    flex-grow: 1;
 
                     .text-1{
                         margin: 0.25rem;
                     }
                     .text-2{
                         margin: 0.5rem;
+                    }
+                }
+                .interviews-container{
+                    overflow-y: scroll;   
+                    flex-grow: 1;
+
+                    .single-interview-container{
+                        background-color: lightblue;
+                        display: flex;
+                        flex-direction: row;
+                        margin-bottom: 1rem;
+
+                        .text-3{
+                            margin: 0.5rem;
+                        }
                     }
                 }
                 .actions-container{

@@ -1,0 +1,18 @@
+<link rel="stylesheet" type="text/css" href="/css/new_interview_to_student_form.css">
+<main>
+    <div class="forms-container">
+        <div id="new-interview-to-student-div">
+            <form action="/students/<%=studentId%>/add-interview" method="POST" id="new-interview-to-student-form">
+                <div class="welcome-txt">Add Interviews</div>
+                <select class="input-initial" name="interviews" id="interview-select" multiple>
+                <% 
+                    for(let interview of interviews){%> 
+                        <option class="input-initial" value="<%= interview._id %>"><%= interview.company.name %></option>    
+                    <%}            
+                %> 
+                </select>
+                <button id="btn-new-student-to-interview" type="submit">Add Interviews</button>
+            </form>
+        </div>
+    </div>
+</main>

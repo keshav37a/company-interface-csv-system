@@ -8,38 +8,38 @@ body {
       flex-direction: row;
       justify-content: center;
       min-height: 100vh; }
-      body main .forms-container #new-student-to-interview-div {
+      body main .forms-container #new-interview-to-student-div {
         background-color: #FFFFFF;
         width: 20rem;
         border-radius: 25px; }
-        body main .forms-container #new-student-to-interview-div #new-student-to-interview-form {
+        body main .forms-container #new-interview-to-student-div #new-interview-to-student-form {
           display: flex;
           flex-direction: column;
           align-items: center; }
-          body main .forms-container #new-student-to-interview-div #new-student-to-interview-form .welcome-txt {
+          body main .forms-container #new-interview-to-student-div #new-interview-to-student-form .welcome-txt {
             font-family: Arial, Helvetica, sans-serif;
             font-weight: 600;
             color: #828282;
             margin: 1rem; }
-          body main .forms-container #new-student-to-interview-div #new-student-to-interview-form .input-initial {
+          body main .forms-container #new-interview-to-student-div #new-interview-to-student-form .input-initial {
             width: 80%;
             border: 1px solid #e5e5e5;
             margin-left: 3rem;
             margin-right: 3rem;
             margin: 1rem;
             padding: 1rem; }
-          body main .forms-container #new-student-to-interview-div #new-student-to-interview-form .link-appearance {
+          body main .forms-container #new-interview-to-student-div #new-interview-to-student-form .link-appearance {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 0.75rem;
             text-decoration: none;
             color: #567FF3;
             font-weight: 600; }
-          body main .forms-container #new-student-to-interview-div #new-student-to-interview-form .link-desc {
+          body main .forms-container #new-interview-to-student-div #new-interview-to-student-form .link-desc {
             margin-left: 0.5rem;
             flex-grow: 1;
             margin-right: 1rem;
             font-size: 0.75rem; }
-          body main .forms-container #new-student-to-interview-div #new-student-to-interview-form #btn-new-student-to-interview {
+          body main .forms-container #new-interview-to-student-div #new-interview-to-student-form #btn-new-student-to-interview {
             background-color: #70BD6B;
             color: #FFFFFF;
             margin-bottom: 1rem;
