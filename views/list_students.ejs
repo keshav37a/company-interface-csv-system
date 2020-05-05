@@ -8,12 +8,13 @@
             {%> 
                 <div class="single-student-container">
                     <div class="nam-bat-id-container">
+                        <div class="headers">Student Details</div>
                         <div class="text-1"><%= student.name %></div>
-                        <div class="text-1"><%= student.batch %></div>
+                        <div class="text-2"><%= student.batch %></div>
                         <div class="text-2"><%= student._id %></div>
                     </div>
                     <div class="interviews-container">
-                        <div>Interviews Scheduled</div>
+                        <div class="headers">Interviews Scheduled</div>
                         <% 
                             for(let interview of student.interview_scheduled_with_companies) {%> 
                                 <div class="single-interview-container">
@@ -34,13 +35,13 @@
                         %>
                     </div>
                     <div class="interviews-container">
-                        <div>Results</div>
+                        <div class="headers">Results</div>
                         <% 
                             for(let result of student.results) {%> 
                                 <div class="single-interview-container">
                                     <div class="text-3"><%= result.interview.company.name %></div>
                                     <div class="text-3 date"><%= result.interview.interview_date %></div>
-                                    <div class="text-3"><%= result.status %></div>
+                                    <div class="text-3 status"><%= result.status %></div>
                                 </div>      
                             <%}
                         %>

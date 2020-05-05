@@ -33,6 +33,13 @@ body{
                 flex-direction: row;
                 justify-content: start;
 
+                .headers{
+                    font-weight: 600;
+                    margin-left: 0.5rem;
+                    font-size: 0.9rem;
+                    margin-bottom: 0.25rem;
+                }
+
                 .nam-bat-id-container{
                     background-color: #FFCF79;
                     display: flex;
@@ -40,11 +47,17 @@ body{
                     min-width: 15rem;
 
                     .text-1{
-                        margin: 0.25rem;
+                        margin: 1rem;      
                     }
                     .text-2{
-                        margin: 0.5rem;
+                        margin: 0.25rem;      
+                        margin-left: 1rem;
                     }
+                    .text-3{
+                        margin: 0.25rem;      
+                        margin-left: 1rem;
+                    }
+                  
                 }
                 .interviews-container{
                     overflow-y: hidden;   
@@ -58,6 +71,9 @@ body{
 
                         .text-3{
                             margin: 0.5rem;
+                        }
+                        .status{
+                            font-weight: 600;
                         }
                     }
                 }
