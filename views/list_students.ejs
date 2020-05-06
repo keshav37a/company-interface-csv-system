@@ -2,6 +2,16 @@
 <script src="/js/list_students.js"></script>
 <script src="/js/date_format.js"></script>
 <main>
+    <div id="filter-container">
+        <div class="label">Filter</div>
+        <div>
+            <select class="input-initial" name="filter" id="filter-select input-initial">
+                <option value="all">Select</option>
+                <option  value="true">Placed</option>
+                <option  value="false">Unplaced</option>
+            </select>
+        </div>
+    </div>
     <div class="students-container">
         <% 
             for(let student of students)  
@@ -28,17 +38,17 @@
                                             <option value="2">On Hold</option>
                                             <option value="3">Didn't Attempt</option>
                                         </select>
-                                        <button id="btn-new-result" type="submit">Add Result</button>    
+                                        <button class="input-initial" id="btn-new-result" type="submit">Add Result</button>    
                                     </form>
                                 </div>      
                             <%}
                         %>
                     </div>
-                    <div class="interviews-container">
+                    <div class="results-container">
                         <div class="headers">Results</div>
                         <% 
                             for(let result of student.results) {%> 
-                                <div class="single-interview-container">
+                                <div class="single-result-container">
                                     <div class="text-3"><%= result.interview.company.name %></div>
                                     <div class="text-3 date"><%= result.interview.interview_date %></div>
                                     <div class="text-3 status"><%= result.status %></div>

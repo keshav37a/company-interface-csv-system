@@ -1,6 +1,7 @@
 const Student = require('../models/student');
 const Company = require('../models/company');
 const Interview = require('../models/interview');
+const Result = require('../models/result');
 
 module.exports.home = async function(req, res){
     // console.log('home in interview_controller called');
@@ -34,6 +35,7 @@ module.exports.createInterviewRequest = async function(req, res){
         
         //Checking to see if an interview by that company id already exists
         let interview = await Interview.findOne({company:company._id});
+
         if(interview){
             req.flash('error', 'Interview already exists');
             return res.redirect('back');
@@ -51,11 +53,24 @@ module.exports.createInterviewRequest = async function(req, res){
             let studentArrayFromDB = [];
             let studentIdFromDB=[];
 
+            //company: company._id,
+            //job_profile: req.body['job-profile'],
+
             if(studentArrayFromReq!=undefined){
                 for(let i=0; i<studentArrayFromReq.length; i++){
                     let studentId = studentArrayFromReq[i];
-                    let studentObj = await Student.findById(studentId);
-                    if(studentObj){
+                    let studentObj = await Student.findById(studentId).populate({path: 'results', populate: {path: 'interview', populate: 'company'}});
+                    let studentResults = studentObj.results;
+                    let toBeAdded = true;
+                    for(let i=0; i<studentResults.length; i++){
+                        let resultObj = studentResults[i];
+                        let interviewObjForThatResult = resultObj.interview;
+                        let companyObjForThatInterview = interviewObjForThatResult.company;
+                        if(companyObjForThatInterview._id.toString() == company._id.toString()){
+                            toBeAdded = false;
+                        }
+                    }
+                    if(studentObj && toBeAdded){
                         console.log('student found in db', studentObj);
                         studentArrayFromDB.push(studentObj);
                         studentIdFromDB.push(studentObj._id);
@@ -99,61 +114,69 @@ module.exports.addStudentToInterviewRender = async function(req, res){
 
 module.exports.addStudentToInterviewRequest = async function(req, res){
     try{
-        console.log('home in interview_controller called');
-        console.log(req.body);
-        console.log(req.params);
-        let interviewId = req.params.id;
+        console.log('addStudentToInterviewRequest in interview_controller called');
 
-        let studentIdsPassedInRequest = req.body.students;
+        let interviewIdReq = req.params.id;
+
+        let studentIdsReq = req.body.students;
+
         if(!Array.isArray(req.body.students)){
-            studentIdsPassedInRequest = [];
-            studentIdsPassedInRequest.push(req.body.students);
+            studentIdsReq = [];
+            studentIdsReq.push(req.body.students);
         }
         
-        let interview = await Interview.findById(interviewId).populate("students").exec();
-        // console.log(interview);
-        console.log(studentIdsPassedInRequest);
+        let interview = await Interview.findById(interviewIdReq);
+    
         if(interview){
+
             let studentsPresentlyAllottedToInterview = interview.students;
-            let addStudentsArray = [];
-            for(let j=0; j<studentIdsPassedInRequest.length; j++){
+            let addStudentIdsArray = [];
+
+            let studFound = 0;
+            let studAdded = 0;
+
+            for(let j=0; j<studentIdsReq.length; j++){
+
                 let boolFound = false;
-                console.log(studentIdsPassedInRequest[j]);
-                let reqStudent = await Student.findById(studentIdsPassedInRequest[j]);
-                console.log(reqStudent);
-                if(reqStudent){
-                    let reqStudentName = reqStudent.name;
-                    console.log(reqStudentName);
-                    for(let i=0; i<studentsPresentlyAllottedToInterview.length; i++){
-                        let currentStudentName = studentsPresentlyAllottedToInterview[i].name;
-                        if(reqStudentName==currentStudentName){
-                            boolFound = true;
-                            break;
-                        }
+                let reqStudentId = studentIdsReq[j];
+                    
+                for(let i=0; i<studentsPresentlyAllottedToInterview.length; i++){
+                    let currentStudentId = studentsPresentlyAllottedToInterview[i];
+
+                    if(reqStudentId.toString()==currentStudentId.toString()){
+                        boolFound = true;
+                        studFound++;
+                        break;
                     }
-                    if(boolFound==false){
-                        let reqStudentId = reqStudent._id;
+                }
+
+                console.log(boolFound);
+    
+                if(boolFound==false){
+                    let student = await Student.findById(reqStudentId);
+                    if(student){
                         interview.students.push(reqStudentId);
                         await interview.save();
-                        addStudentsArray.push(reqStudent);
-                    }        
-                }
-                else{
-                    req.flash('error', 'Student not found');
-                    console.log('student not found');
-                }
+                        studAdded++;
+                        addStudentIdsArray.push(reqStudentId);
+                        student.interview_scheduled_with_companies.push(interview);
+                        await student.save();
+                    }
+                }        
             }
 
-            for(let i=0; i<addStudentsArray.length; i++){
-                let student = addStudentsArray[i];
-                student.interview_scheduled_with_companies.push(interview);
-                await student.save();
+            if(studFound>0){
+                req.flash('error', `${studFound} students were already added to interview`);
             }
-            req.flash('success', 'Student added successfully');
+
+            if(studAdded>0){
+                req.flash('success', `${studAdded} students added to interview`);
+            }
+
             return res.redirect('/interviews');
         }
         else{
-            console.log('interview by id not found');
+            req.flash('error', 'Interview not found');
             return res.redirect('/companies');
         }
     }

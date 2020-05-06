@@ -10,6 +10,34 @@ body main {
     min-width: 15rem; }
   body main #interview-scheduled-header-container {
     min-width: 15rem; }
+  body main .input-initial {
+    width: 80%;
+    border: 1px solid #e5e5e5;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-top: 0.5rem;
+    padding: 0.25rem; }
+  body main #filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; }
+    body main #filter-container .label {
+      margin-right: 1rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-top: 0.75rem; }
+  body main .results-container {
+    min-width: 20rem; }
+    body main .results-container .single-result-container {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 1rem; }
+      body main .results-container .single-result-container .text-3 {
+        margin: 0.25rem;
+        margin-left: 1rem; }
+      body main .results-container .single-result-container .status {
+        font-weight: 600;
+        font-size: 0.9rem; }
   body main .students-container {
     min-height: 100vh;
     margin: 0.5rem;
@@ -51,6 +79,9 @@ body main {
             margin: 0.5rem; }
           body main .students-container .single-student-container .interviews-container .single-interview-container .status {
             font-weight: 600; }
+          body main .students-container .single-student-container .interviews-container .single-interview-container #btn-new-result {
+            padding: 0.5rem;
+            background-color: #FFCF79; }
       body main .students-container .single-student-container .actions-container {
         display: flex;
         flex-direction: column; }

@@ -26,8 +26,8 @@ body main {
           margin: 0.5rem; }
       body main .interview-container .single-interview-container .students-container {
         margin-left: 0.5rem;
-        overflow-y: hidden;
-        flex-grow: 1; }
+        flex-grow: 1;
+        overflow-y: hidden; }
         body main .interview-container .single-interview-container .students-container .single-student-container {
           display: flex;
           flex-direction: column;

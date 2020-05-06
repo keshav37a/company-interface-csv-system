@@ -13,13 +13,4 @@ statuses.each(function(){
     else{
         el.css('color', 'blue');
     }
-})
-
-// for(let i=0; i<statuses.length; i++){
-//     let statusObj = statusObj[i];
-//     let statusObjString = statusObj.innerHTML;
-//     if(statusObjString.toLowerCase()=='pass'){
-//         $(statusObj).css("color", "green");
-//     }
-// }
-// console.log(statuses);
+});

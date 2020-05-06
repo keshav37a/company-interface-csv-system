@@ -113,12 +113,17 @@ module.exports.addInterviewToStudentRequest = async function(req, res){
         }
 
         //Find student from studentId
-        let studentObj = await Student.findById(studentId);
-        console.log('studentObj');
+        let studentObj = await Student.findById(studentId).populate('results');
+        console.log('studentObj', studentObj);
         if(studentObj){ 
             let allocatedInterviews = studentObj.interview_scheduled_with_companies;
+            let results = studentObj.results;
+
             console.log('allocatedInterviews');
             console.log(allocatedInterviews);
+
+            console.log('results');
+            console.log(results);
 
             let isAdded = 0;
 
@@ -126,6 +131,7 @@ module.exports.addInterviewToStudentRequest = async function(req, res){
             for(let i=0; i<interviewIdsReqArr.length; i++){
                 let interviewIdReqObj = interviewIdsReqArr[i];
                 let isFound = false;
+
                 //loop through allocated interviews of the student to check whether they have already been added or not
                 for(let j=0; j<allocatedInterviews.length; j++){
                     let allocatedInterviewObjId = allocatedInterviews[j];
@@ -137,6 +143,19 @@ module.exports.addInterviewToStudentRequest = async function(req, res){
                     }
                 }
 
+                //loop through the results of the student to check if the interview is already present
+                for(let j=0; j<results.length; j++){
+                    let resultObj = results[j];
+                    let interviewObj = resultObj.interview;
+                    if(interviewIdReqObj.toString()==interviewObj){
+                        isFound = true;
+                        console.log(isFound);
+                        req.flash('error', 'Result for that interview already added for student');
+                        break;
+                    }
+
+                }
+                
                 //if not found then add
                 if(isFound==false){
                     let interviewObj = await Interview.findById(interviewIdReqObj);

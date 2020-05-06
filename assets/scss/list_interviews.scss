@@ -32,15 +32,19 @@ body{
                     .text-2{
                         margin: 0.5rem;
                     }
+                    .status{
+                        font-weight: 600;
+                        font-size: 0.8rem;
+                    }
                 }
                 .students-container{
-                    margin-left: 0.5rem;
-                    overflow-y: hidden;   
+                    margin-left: 0.5rem;  
                     flex-grow: 1;
+
                     .single-student-container{
                         display: flex;
                         flex-direction: column;
-                        margin-bottom: 1rem;
+                        margin-bottom: 1rem;    
                     }
                 }
                 .actions-container{
