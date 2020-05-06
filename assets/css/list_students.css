@@ -34,7 +34,8 @@ body main {
       margin-bottom: 1rem; }
       body main .results-container .single-result-container .text-3 {
         margin: 0.25rem;
-        margin-left: 1rem; }
+        margin-left: 1rem;
+        min-width: 4rem; }
       body main .results-container .single-result-container .status {
         font-weight: 600;
         font-size: 0.9rem; }

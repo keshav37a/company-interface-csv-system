@@ -1,10 +1,14 @@
 const axios = require('axios');
+
+//To get job list by hitting an api(github) using axios
 module.exports.github = async function (req, res) {
     console.log('github in external_controller called');
     try{
         const response = await axios.get('https://jobs.github.com/positions.json?description=python');
         let responseData = response.data;
         let resArr = [];
+
+        //If the response consists of HTML tags then this removes them
         for(let response of responseData){
             let resObj = response;
             resObj.description = resObj.description

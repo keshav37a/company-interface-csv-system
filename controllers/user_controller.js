@@ -2,7 +2,6 @@ const User = require('../models/user');
 const Crypto = require('../config/crypto');
 
 module.exports.user = function(req, res){
-    console.log('user in user_controller called');
     return res.send('<h1>User</h1>');
 }
 
@@ -18,7 +17,6 @@ module.exports.signUpRender = function(req, res){
 
 module.exports.createUserRequest = async function(req, res){
     console.log(req.body);
-    let title = "sign-up";
 
     if (req.body.password != req.body.confirmPassword) {
         console.log("Passwords do not match");
@@ -52,6 +50,7 @@ module.exports.createUserRequest = async function(req, res){
     }
 }
 
+//Sign in after creating session from passport middleware
 module.exports.createSessionRequest = function(req, res){
     console.log(req.body);
     let title = "sign-in";

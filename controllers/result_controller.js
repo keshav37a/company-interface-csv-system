@@ -5,22 +5,20 @@ const { Parser } = require('json2csv');
 const moment = require('moment');
 const StatusEnums = require('../config/status_enums');
 
+//To render the results list page
 module.exports.home = async function(req, res){
     try{
-        console.log('home in result_controller called');
         let results = await Result.find({}).populate({path:'student', populate:{path:'course_score'}}).populate({path: 'interview', populate: { path: 'company' }});
-        // console.log(results);
         return res.render('list_results', {title: 'results', results: results});
     }
     catch(err){
         return res.render('/students');
     }
-    
 }
 
+//To render the create new result list page
 module.exports.newResultRender = async function(req, res){
     try{
-        console.log('newResultRender in result_controller called');
         let students = await Student.find();
         let interviews = await Interview.find().populate('company');
         return res.render('new_result_form', {title:'New Interview Form', students: students, interviews:interviews});
@@ -31,23 +29,21 @@ module.exports.newResultRender = async function(req, res){
     }
 }
 
+//To request for a new result to be added to the db
 module.exports.createResultRequest = async function(req, res){
     try{
-        console.log('createResultRequest in result_controller called');
-        // console.log(req.body);
-
+        
         let boolStudent = false;
         let boolInterview = false;
 
         let studentId = req.body.student;
         let interviewId = req.body['interview-name'];
 
-        //enums mapping has been done in config. Used to get the status from the number
+        //enums mapping has been done in config. Used to get the result status from the number
         let resultCode = req.body.result;
         let resultString = StatusEnums[resultCode]; 
         req.body.result = resultString
-        // let result = req.body.result;
-
+    
         let selectedStudent = await Student.findById(studentId);
         if(selectedStudent)
             boolStudent = true;
@@ -56,41 +52,31 @@ module.exports.createResultRequest = async function(req, res){
         if(selectedInterview)
             boolInterview = true;
 
-        //If result for that particular interview and student has been added
+        //Find results of the requested student 
         let resultsByStudentId = await Result.find({student: selectedStudent._id}).populate('interview');
-        console.log(resultsByStudentId);
-
-
-        console.log(typeof(resultsByStudentId));
+        
+        //Check to see if the result for that interview has already been added or not
         for(let i=0; i<resultsByStudentId.length; i++){
             console.log('in loop');
             let result = resultsByStudentId[i];
-            console.log(result.interview._id);
-            console.log(selectedInterview._id);
             if(result.interview._id.toString() == selectedInterview._id.toString()){
                 req.flash('error', 'Result for this student and interview have already been added');
                 return res.redirect('back');
             }
         }
 
-        console.log(boolStudent);
-        console.log(boolInterview);
-
         if(boolInterview && boolStudent){
-            //student me se interview nikal
-            console.log('interviewidToBePulled', interviewId);
+            
+            //Remove the interview from the scheduled interview array of the student
             await selectedStudent.updateOne({$pull: {'interview_scheduled_with_companies': {$in : [interviewId.toString()]}}});
 
-            //interview me se student nikal
-            // await interview.update({$pull: {interviews_scheduled_with_companies: {$in : [interviewId]}}});
-            console.log("Both true");
-
+            //If the result is pass then add the interview item to the interview cleared array
             if(resultString.toLowerCase()=='pass'){
                 selectedStudent.interview_cleared_with_companies.push(interviewId);
                 selectedStudent.placement_status = true;
             }
 
-            //add items to result
+            //create a new result for the student
             let newResult = await Result.create({student: selectedStudent._id, interview: selectedInterview._id, status: req.body.result});
             selectedStudent.results.push(newResult);
             await selectedStudent.save();
@@ -98,7 +84,6 @@ module.exports.createResultRequest = async function(req, res){
 
             req.flash('success', 'Result added successfully');
         }
-        // console.log(interviews);
         return res.redirect('/results');
     }
     catch(err){
@@ -108,10 +93,10 @@ module.exports.createResultRequest = async function(req, res){
     }    
 }
 
+//To export all the results into the csv
 module.exports.exportToCsv = async function(req, res){
     try{
         let results = await Result.find({}).populate({path:'student', populate:{path:'course_score'}}).populate({path: 'interview', populate: { path: 'company' }});    
-    
         let resultArr = [];
         for(let i=0; i<results.length; i++){
             let obj = {};
@@ -131,19 +116,17 @@ module.exports.exportToCsv = async function(req, res){
             obj['status'] = results[i].status;
             resultArr.push(obj);
         }
-    
-        // console.log(resultArr);
 
         const fields = ['id', 'student_name', 'college', 'is_placed', 'ds_scores', 'web_dev_scores',
                         'react_scores', 'interview_date', 'company_name', 'status'];
 
         const opts = { fields };
         
+        //Parsing the object into csv using jsontocsv library
         const parser = new Parser(opts);
         const csv = parser.parse(resultArr);
-        // console.log(csv);
         
-        res.attachment('filename.csv');
+        res.attachment('results.csv');
         res.status(200).send(csv);
     }
     catch(err){

@@ -6,26 +6,27 @@ const StatusEnums = require('../config/status_enums');
 const BatchEnums = require('../config/batch_enums');
 
 module.exports.home = async function(req, res){
-    console.log('home in student_controller called');
     let students = await Student.find().populate({path: 'interview_scheduled_with_companies', populate: { path: 'company' }}).populate({path: 'results', populate: { path: 'interview', populate: {path: 'company'} }});
+
+    //Getting the enum objects and formatting into an array of key value objects to populate the dropdown filter list
     let statusEnumsArr = convertObjToArray(StatusEnums);
     let batchEnumsArr = convertObjToArray(BatchEnums);
+
+    //Passing interviews to populate the filter by interviews dropdown
     let interviews = await Interview.find().populate('company');
     return res.render('list_students', {title:'Students List', students: students, resultStatuses: statusEnumsArr, interviews: interviews, batches: batchEnumsArr});
 }
 
+//Render a form to add a new student
 module.exports.newStudentRender = function(req, res){
-    console.log('newStudentRender in student_controller called');
     return res.render('new_student_form', {title:'New Student Form'});
 }
 
+//Request to create a new student
 module.exports.createStudentRequest = async function(req, res){
     try{
-        console.log('student in student_controller called');
-        console.log(req.body);
         let student = await Student.findOne({email:req.body.email});
         if(student){
-            console.log('Student already exists');
             req.flash('error', 'Student already exists');
             return res.redirect('back');
         }
@@ -58,28 +59,29 @@ module.exports.createStudentRequest = async function(req, res){
     }
 }
 
+//Dynamically populating data for dropdown in the front end by sending the json obj 
 module.exports.getDataForDropdown = async function(req, res){
     try{
         console.log('In getDataForDropdown');
         let studentId = req.params.id;
+
+        //Populating the select company option by passing only those names of the companies whose interview has been scheduled
         if(studentId=="none"){
             let interviews = await Interview.find().populate('company');
-            console.log('backend: ', interviews);
             return res.status(200).json({
                 data: interviews,
                 message: 'not found'
             });    
         }
+        
         let foundStudent = await Student.findById(studentId).populate({path: 'interview_scheduled_with_companies', populate: {path: 'company'}}).populate('interview_cleared_with_companies');
         if(foundStudent){
-            // console.log(foundStudent);
             return res.status(200).json({
                 data: foundStudent,
                 message: 'student found'
             });    
         }
         else{
-            console.log('Student not found');
             req.flash('error', 'Student not found');
             return res.status(404).json({
                 data: -1,
@@ -95,7 +97,7 @@ module.exports.getDataForDropdown = async function(req, res){
     }
 }
 
-
+//Render the page to add a new interview to a student
 module.exports.addInterviewToStudentRender = async function(req, res){
     let studentId = req.params.id;
     console.log('addInterviewToStudentRender in student_controller called');
@@ -103,6 +105,7 @@ module.exports.addInterviewToStudentRender = async function(req, res){
     return res.render('new_interview_to_student_form', {title:'interview List', interviews: interviews, studentId:studentId});
 }
 
+//Request to allocate an interview to a student
 module.exports.addInterviewToStudentRequest = async function(req, res){
     try{
         console.log('req.body');
@@ -240,14 +243,13 @@ module.exports.addResultToStudentWithCompanyRequest = async function(req, res){
         console.log(boolInterview);
 
         if(boolInterview && boolStudent){
-            //student me se interview nikal
+            //Remove interview from students interview scheduled array
             console.log('interviewidToBePulled', interviewId);
             await selectedStudent.updateOne({$pull: {'interview_scheduled_with_companies': {$in : [interviewId.toString()]}}});
 
-            //interview me se student nikal
-            // await interview.update({$pull: {interviews_scheduled_with_companies: {$in : [interviewId]}}});
             console.log("Both true");
 
+            //If the status is pass then push the interview to selectedStudentInterview
             if(resultString.toLowerCase()=='pass'){
                 selectedStudent.interview_cleared_with_companies.push(interviewId);
                 selectedStudent.placement_status = true;
@@ -261,7 +263,6 @@ module.exports.addResultToStudentWithCompanyRequest = async function(req, res){
 
             req.flash('success', 'Result added successfully');
         }
-        // console.log(interviews);
         return res.redirect('back');
     }
     catch(err){
@@ -272,6 +273,7 @@ module.exports.addResultToStudentWithCompanyRequest = async function(req, res){
 
 }
 
+//Get student data from filters
 module.exports.getFilterData = async function(req, res){
     console.log('getFilterData in getFilterData called');
     console.log(req.body);
@@ -331,6 +333,7 @@ module.exports.getFilterData = async function(req, res){
         console.log(studArr);
     }
 
+    //Getting arrays of name value pairs from enum objects to pass them in the front end to populate the dropdown list
     let statusEnumsArr = convertObjToArray(StatusEnums);
     let batchEnumsArr = convertObjToArray(BatchEnums);
     let interviews = await Interview.find().populate('company');
@@ -345,7 +348,7 @@ module.exports.getFilterData = async function(req, res){
         });
 }
 
-
+//Converting a js object to an array of key value pairs
 let convertObjToArray = function(obj){
     let arr = Object.keys(obj).map(function (key) { 
         let value=Number(key);

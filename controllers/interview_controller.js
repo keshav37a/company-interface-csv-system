@@ -3,18 +3,15 @@ const Company = require('../models/company');
 const Interview = require('../models/interview');
 const Result = require('../models/result');
 
+//To render the page which shows a list of all interviews registered
 module.exports.home = async function(req, res){
-    // console.log('home in interview_controller called');
     let interviews = await Interview.find({}).populate('company').populate('students');
-    // console.log(interviews);
-    // console.log(interviews[0].students);
-
     return res.render('list_interviews', {title:'interview List', interviews: interviews});
 }
 
+//To render a page to add a new interview
 module.exports.newInterviewRender = async function(req, res){
     try{
-        console.log('newInterviewRender in interview_controller called');
         let students = await Student.find();
         let companies = await Company.find();
         return res.render('new_interview_form', {title:'New Interview Form', students: students, companies:companies});
@@ -27,10 +24,9 @@ module.exports.newInterviewRender = async function(req, res){
     
 }
 
+//To request for new interview to be added to the database
 module.exports.createInterviewRequest = async function(req, res){
     try{
-        console.log('createInterviewRequest in interview_controller called');
-        console.log('req.body', req.body);
         let company = await Company.findById(req.body['company-id']);
         
         //Checking to see if an interview by that company id already exists
@@ -42,6 +38,8 @@ module.exports.createInterviewRequest = async function(req, res){
         }
         else{
             let studentArrayFromReq = [];
+
+            //If the requested body recieved is not an array then make an array and add the single item to it
             if(Array.isArray(req.body['students'])){
                 studentArrayFromReq = req.body['students'];
             }
@@ -49,13 +47,10 @@ module.exports.createInterviewRequest = async function(req, res){
                 studentArrayFromReq.push(req.body['students']);
             }
 
-            console.log('studentArrayFromReq', studentArrayFromReq);
             let studentArrayFromDB = [];
             let studentIdFromDB=[];
 
-            //company: company._id,
-            //job_profile: req.body['job-profile'],
-
+            //If there are also a list of students in the body of the request
             if(studentArrayFromReq!=undefined){
                 for(let i=0; i<studentArrayFromReq.length; i++){
                     let studentId = studentArrayFromReq[i];
@@ -66,19 +61,22 @@ module.exports.createInterviewRequest = async function(req, res){
                         let resultObj = studentResults[i];
                         let interviewObjForThatResult = resultObj.interview;
                         let companyObjForThatInterview = interviewObjForThatResult.company;
+
+                        //If the student is already allocated to that interview
                         if(companyObjForThatInterview._id.toString() == company._id.toString()){
                             toBeAdded = false;
                         }
                     }
+
+                    //Adding all those students in an array who have been allocated that interview
                     if(studentObj && toBeAdded){
-                        console.log('student found in db', studentObj);
                         studentArrayFromDB.push(studentObj);
                         studentIdFromDB.push(studentObj._id);
                     }
                 }
             }
         
-            // console.log(company);
+            //Creating a new interview obj in database
             let newInterview = await Interview.create({
                 company: company._id,
                 job_profile: req.body['job-profile'],
@@ -86,8 +84,8 @@ module.exports.createInterviewRequest = async function(req, res){
                 interview_date: req.body['date']
             });
 
-            // console.log(newInterview);
 
+            //Adding that interview object to the interview_scheduled_with_companies array for all those students who have been allocated that interview
             for(let i=0; i<studentArrayFromDB.length; i++){
                 let student = studentArrayFromDB[i];
                 student.interview_scheduled_with_companies.push(newInterview._id);
@@ -105,6 +103,7 @@ module.exports.createInterviewRequest = async function(req, res){
 }
 
 
+//To render a page to add a new student to an existing interview
 module.exports.addStudentToInterviewRender = async function(req, res){
     let interviewId = req.params.id;
     console.log('home in interview_controller called');
@@ -112,37 +111,38 @@ module.exports.addStudentToInterviewRender = async function(req, res){
     return res.render('new_student_to_interview_form', {title:'interview List', students: students, interviewId:interviewId});
 }
 
+//To request for new student to be added to the existing interview in the database
 module.exports.addStudentToInterviewRequest = async function(req, res){
     try{
-        console.log('addStudentToInterviewRequest in interview_controller called');
-
         let interviewIdReq = req.params.id;
-
         let studentIdsReq = req.body.students;
 
+        //If the requested body recieved is not an array then make an array and add the single item to it
         if(!Array.isArray(req.body.students)){
             studentIdsReq = [];
             studentIdsReq.push(req.body.students);
         }
         
         let interview = await Interview.findById(interviewIdReq);
-    
-        if(interview){
 
+        if(interview){
             let studentsPresentlyAllottedToInterview = interview.students;
             let addStudentIdsArray = [];
 
             let studFound = 0;
             let studAdded = 0;
 
+            //Iterating through all the student ids passed in the request who have to be added to the interview
             for(let j=0; j<studentIdsReq.length; j++){
 
                 let boolFound = false;
                 let reqStudentId = studentIdsReq[j];
                     
+                //Iterating through the allocated students of the interview id passed in the request
                 for(let i=0; i<studentsPresentlyAllottedToInterview.length; i++){
                     let currentStudentId = studentsPresentlyAllottedToInterview[i];
 
+                    //If any of the students allocated to that interview have the same id as the requested students then they wont be allocated
                     if(reqStudentId.toString()==currentStudentId.toString()){
                         boolFound = true;
                         studFound++;
@@ -152,6 +152,7 @@ module.exports.addStudentToInterviewRequest = async function(req, res){
 
                 console.log(boolFound);
     
+                //If the req student did not match with the already allocated students of that interview then add that student to the interview and add that interview to the student
                 if(boolFound==false){
                     let student = await Student.findById(reqStudentId);
                     if(student){

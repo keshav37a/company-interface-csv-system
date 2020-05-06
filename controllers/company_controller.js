@@ -1,22 +1,21 @@
 const Company = require('../models/company');
+
 module.exports.home = async function (req, res) {
-    console.log('home in company_controller called');
     let companies = await Company.find();
     return res.render('list_companies', { title: 'Company List', companies: companies });
 }
 
+//Renders a Form to add a new company
 module.exports.newcompanyRender = async function (req, res) {
-    console.log('company in company_controller called');
     return res.render('new_company_form', { title: 'New company Form' });
 }
 
+//Request to add a new company in the database
 module.exports.createcompanyRequest = async function (req, res) {
     try{
-        console.log('createCompanyRequest in interview_controller called');
-        // console.log(req.body);
         let company = await Company.findOne({name:req.body.name});
+
         if(company){
-            console.log('company already exists');
             req.flash('error', 'Company already exists');
             return res.redirect('back');
         }
@@ -26,7 +25,6 @@ module.exports.createcompanyRequest = async function (req, res) {
                 hr_email: req.body.email
             });
 
-            console.log('new newCompany created');
             req.flash('success', 'Company added successfully');
             return res.redirect('/companies');
         }
@@ -37,5 +35,3 @@ module.exports.createcompanyRequest = async function (req, res) {
         return res.redirect('/back');
     }
 }
-
-
