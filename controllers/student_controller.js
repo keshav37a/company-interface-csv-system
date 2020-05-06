@@ -3,15 +3,19 @@ const CourseScore = require('../models/course_score');
 const Interview = require('../models/interview');
 const Result = require('../models/result');
 const StatusEnums = require('../config/status_enums');
+const BatchEnums = require('../config/batch_enums');
 
 module.exports.home = async function(req, res){
-    console.log('student in student_controller called');
+    console.log('home in student_controller called');
     let students = await Student.find().populate({path: 'interview_scheduled_with_companies', populate: { path: 'company' }}).populate({path: 'results', populate: { path: 'interview', populate: {path: 'company'} }});
-    return res.render('list_students', {title:'Students List', students: students});
+    let statusEnumsArr = convertObjToArray(StatusEnums);
+    let batchEnumsArr = convertObjToArray(BatchEnums);
+    let interviews = await Interview.find().populate('company');
+    return res.render('list_students', {title:'Students List', students: students, resultStatuses: statusEnumsArr, interviews: interviews, batches: batchEnumsArr});
 }
 
 module.exports.newStudentRender = function(req, res){
-    console.log('student in student_controller called');
+    console.log('newStudentRender in student_controller called');
     return res.render('new_student_form', {title:'New Student Form'});
 }
 
@@ -266,4 +270,87 @@ module.exports.addResultToStudentWithCompanyRequest = async function(req, res){
         return res.redirect('back');
     }    
 
+}
+
+module.exports.getFilterData = async function(req, res){
+    console.log('getFilterData in getFilterData called');
+    console.log(req.body);
+    let key = Object.keys(req.body);
+
+    let studArr = [];
+    let students = await Student.find().populate({path: 'interview_scheduled_with_companies', populate: { path: 'company' }}).populate({path: 'results', populate: { path: 'interview', populate: {path: 'company'} }});
+
+    if(key[0]=='result'){
+        let currentStatus = StatusEnums[req.body['result']];
+        console.log('statusEnums[key]["result"]:', currentStatus);
+        if(currentStatus==undefined){
+            studArr = students;
+        }
+        else{
+            for(let student of students){
+                let results = student.results;
+                for(let result of results){
+                    if(result.status == currentStatus){
+                        studArr.push(student);
+                    }
+                }
+            }
+        }
+        console.log(studArr);
+    }
+    else if(key[0]=='interview'){
+        let interviewId = req.body['interview'];
+        if(interviewId=='all'){
+            studArr = students;
+        }
+        else{
+            for(let student of students){
+                let interviewsScheduled = student.interview_scheduled_with_companies;
+                for(let interview of interviewsScheduled){
+                    if(interviewId == interview._id){
+                        studArr.push(student);
+                    }
+                }
+            }
+        }
+        console.log(studArr);
+    }
+    else if(key[0]=='batch'){
+        let currentBatch = BatchEnums[req.body['batch']];
+        console.log('currentBatch:', currentBatch);
+        if(currentBatch=='all'){
+            studArr = students;
+        }
+        else{
+            for(let student of students){
+                if(student.batch==currentBatch){
+                    studArr.push(student);
+                }
+            }
+        }
+        console.log(studArr);
+    }
+
+    let statusEnumsArr = convertObjToArray(StatusEnums);
+    let batchEnumsArr = convertObjToArray(BatchEnums);
+    let interviews = await Interview.find().populate('company');
+
+    return res.render('list_students', 
+        {
+            title:'Students List', 
+            students: studArr, 
+            resultStatuses: statusEnumsArr, 
+            interviews: interviews, 
+            batches: batchEnumsArr
+        });
+}
+
+
+let convertObjToArray = function(obj){
+    let arr = Object.keys(obj).map(function (key) { 
+        let value=Number(key);
+        let name = obj[key];
+        return {name: name, value:value};
+    });    
+    return arr;
 }

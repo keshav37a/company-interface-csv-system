@@ -3,14 +3,51 @@
 <script src="/js/date_format.js"></script>
 <main>
     <div id="filter-container">
-        <div class="label">Filter</div>
         <div>
-            <select class="input-initial" name="filter" id="filter-select input-initial">
-                <option value="all">Select</option>
-                <option  value="true">Placed</option>
-                <option  value="false">Unplaced</option>
-            </select>
+            <form method="POST" action="/students/filter/results" id="result-filter-form">
+                <div class="label input-initial">Filter by Results</div>
+                <select class="input-initial" name="result" id="filter-result-select">
+                    <option name="status" value="all">Select Filter</option>
+                    <% 
+                        for(let resultStatus of resultStatuses) {%>
+                            <option name="status" value="<%=resultStatus.value%>"><%=resultStatus.name%></option>    
+                        <%}
+                    %>
+                    <option value="all">No Filter</option>
+                </select>
+            </form>
         </div>
+        
+        <div>
+            <form method="POST" action="/students/filter/results" id="interview-filter-form">
+                <div class="label input-initial">Filter by Interview</div>
+                <select class="input-initial" name="interview" id="filter-interview-select">
+                    <option value="all">Select Filter</option>
+                    <% 
+                        for(let interview of interviews) {%>
+                            <option name="interview-id" value="<%=interview._id%>"><%=interview.company.name%></option>    
+                        <%}
+                    %>
+                    <option value="all">No Filter</option>
+                </select>
+            </form>
+        </div>
+
+        <div>
+            <form method="POST" action="/students/filter/results" id="batch-filter-form">
+                <div class="label input-initial">Filter by Batch</div>
+                <select class="input-initial" name="batch" id="filter-batch-select">
+                    <option value="all">Select Filter</option>
+                    <% 
+                        for(let batch of batches) {%> 
+                            <option name="batch" value="<%=batch.value %>"><%=batch.name%></option>    
+                        <%}
+                    %>
+                    <option value="all">No Filter</option>
+                </select>
+            </form>
+        </div>
+
     </div>
     <div class="students-container">
         <% 

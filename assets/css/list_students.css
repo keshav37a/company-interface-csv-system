@@ -11,7 +11,7 @@ body main {
   body main #interview-scheduled-header-container {
     min-width: 15rem; }
   body main .input-initial {
-    width: 80%;
+    width: 60%;
     border: 1px solid #e5e5e5;
     margin-left: 3rem;
     margin-right: 3rem;
@@ -22,10 +22,10 @@ body main {
     flex-direction: row;
     justify-content: center; }
     body main #filter-container .label {
-      margin-right: 1rem;
       font-weight: 600;
       font-size: 0.8rem;
-      margin-top: 0.75rem; }
+      margin-top: 0.75rem;
+      border: none; }
   body main .results-container {
     min-width: 20rem; }
     body main .results-container .single-result-container {

@@ -8,6 +8,7 @@ router.get('/:id/dropdown', passport.checkAuthentication, studentController.getD
 router.get('/new-student', passport.checkAuthentication, studentController.newStudentRender);
 router.get('/:id/new-interview', passport.checkAuthentication, studentController.addInterviewToStudentRender);
 
+router.post('/filter/results', passport.checkAuthentication, studentController.getFilterData);
 router.post('/:id/add-interview', passport.checkAuthentication,studentController.addInterviewToStudentRequest);
 router.post('/create-student', passport.checkAuthentication, studentController.createStudentRequest);
 router.post('/add-result', passport.checkAuthentication, studentController.addResultToStudentWithCompanyRequest);
