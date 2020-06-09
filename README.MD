@@ -35,3 +35,7 @@ This project has the following features-
 * Add a new Student, Company, Interview, Result
 * Export data to CSV
 * Filter results
+
+## Project Demo
+
+`https://drive.google.com/file/d/1DaV-RxeDBJFoCea_N7Ex2UjRYZqK6a2d/view?usp=sharing`
